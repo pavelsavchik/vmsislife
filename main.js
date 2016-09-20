@@ -1,9 +1,12 @@
 function main(){
 	"use strict";
 
-	// var entity = new ActionEntity({x : -1, y : -1, step : .02});
 
 	Utils.resize();
+
+	var entity = new ActionEntity({x : 1, y : 1, step : .02});
+	entity.draw();
+
 	// entity.draw();
 
 	var generateLab = function() {
@@ -16,6 +19,14 @@ function main(){
 	earth.draw();	
 
 	setTimeout(generateLab, 1000);
+
+	// var generateLab = function() {
+	// 	var text = new LabEntity({x : Math.random() * 600, y : 700})
+	// 	text.draw();
+	// 	setTimeout(generateLab, 1000);
+	// }
+
+	// setTimeout(generateLab, 1000);
 
 	// var textEntity = new TextEntity({x : -.5, y : -.3}, "Hello world");
 	// textEntity.draw();

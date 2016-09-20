@@ -8,7 +8,7 @@
 </script>
 <script id="fs" type="notjs">
     precision mediump float;
-    uniform float color; 
+    uniform float color;
 
     void main() {
       // gl_FragColor is a special variable a fragment shader
@@ -19,12 +19,12 @@
 
 <script id="vs-entity" type="notjs">
     attribute vec4 position;
-    attribute vec4 aVertexColor;
+    attribute vec4 color;
 
     varying lowp vec4 vColor;
 
     void main() {
-      vColor = aVertexColor;
+      vColor = color;
       gl_Position = position;
     } 
 </script>
