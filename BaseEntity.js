@@ -14,19 +14,22 @@ class BaseEntity {
 
 	    this.gl = twgl.getWebGLContext($("#glcanvas")[0]);
 	    this.maxY = this.gl.canvas.height;
-		this.programInfo = twgl.createProgramInfo(this.gl, ["vs-entity", "fs-entity"]);
+		this.programInfo = twgl.createProgramInfo(this.gl, [this.getVShader(), this.getFShader()]);
 		this.drawingMethod = this.gl.TRIANGLES;
 
 		this.mapToRange = (number, index, array, fromMin = 0, fromMax = this.gl.canvas.height, toMin = -1, toMax = 1) => 
 			(index + 1) % 3 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+		
 		this.mapColor = (number, index, array, fromMin = 0, fromMax = 256, toMin = 0, toMax = 1) => 
 			(index + 1) % 4 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+		
 		this.absoluteToRelative = array => array.map(this.mapToRange);
 		this.convertColors = array => array.map(this.mapColor);
 
 		this.display = function(time) {
 			var uniforms = {
-			      time: time * 0.0001
+			      time: time * 0.1 % 360,
+			      middle : [this.position.x, this.position.y]
 			};
 
 			var bufferInfo = this.getBufferInfo();
@@ -73,3 +76,6 @@ BaseEntity.prototype.getArrays = function(x, y) {
 };
 
 BaseEntity.prototype.isInBorder = (coordinate) => coordinate <= 1 && coordinate >= -1;
+
+BaseEntity.prototype.getVShader = () => "vs-entity";
+BaseEntity.prototype.getFShader = () => "fs-entity";

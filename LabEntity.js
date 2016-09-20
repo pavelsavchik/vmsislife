@@ -215,13 +215,14 @@ LabEntity.prototype.getArrays = function(x, y) {
 	// var colors = this.LColors.concat(this.AColors.concat(this.getLetterBColors()));
 	return  {
 	   position: this.absoluteToRelative(positions),
+	   // position: (positions),
 	   color: this.colors
 	};
 };
 
 LabEntity.prototype.draw = function() {
 	function _draw(time) {
-		this.position.y-=2;
+		this.position.y -= 3;
 		this.display(time);
 		if (this.position.y > 100) {
 	    	requestAnimationFrame(_draw.bind(this));
@@ -230,3 +231,7 @@ LabEntity.prototype.draw = function() {
 
 	requestAnimationFrame(_draw.bind(this));
 };
+
+
+// LabEntity.prototype.getVShader = () => "vs-lab";
+// LabEntity.prototype.getFShader = () => "fs-lab";
