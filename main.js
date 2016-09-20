@@ -8,21 +8,13 @@ function main(){
 
 	// entity.draw();
 
+	var earth = new EarthEntity({x: 100, y: 100});
+	earth.draw();	
+
 	var generateLab = function() {
 		var text = new LabEntity({x : Math.random() * 600, y : 700})
 		text.draw();
 		setTimeout(generateLab, 1000);
-	}
-
-	var earth = new EarthEntity({x: 100, y: 100});
-	earth.draw();	
-
-	setTimeout(generateLab, 1000);
-
-	var generateLab = function() {
-		var text = new LabEntity({x : Math.random() * 600, y : 700})
-		text.draw();
-		// setTimeout(generateLab, 1000);
 	}
 
 	setTimeout(generateLab, 1000);
