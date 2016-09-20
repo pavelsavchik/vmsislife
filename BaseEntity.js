@@ -20,25 +20,27 @@ class BaseEntity {
 		this.mapToRange = (number, index, array, fromMin = 0, fromMax = this.gl.canvas.height, toMin = -1, toMax = 1) => 
 			(index + 1) % 3 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
 		this.absoluteToRelative = array => array.map(this.mapToRange);
+
+		this.display = function(time) {
+			var uniforms = {
+			      time: time * 0.0001
+			};
+
+			var bufferInfo = this.getBufferInfo();
+
+			twgl.resizeCanvasToDisplaySize(this.gl.canvas);
+		    this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
+		    this.gl.useProgram(this.programInfo.program);
+		    twgl.setUniforms(this.programInfo, uniforms);
+		    twgl.setBuffersAndAttributes(this.gl, this.programInfo, bufferInfo);
+		    twgl.drawBufferInfo(this.gl, this.drawingMethod, bufferInfo);
+		};
 	}
 };
 
 BaseEntity.prototype.draw = function() {
 	function _draw(time) {
-
-		var uniforms = {
-		      time: time * 0.0001
-		};
-
-		var bufferInfo = this.getBufferInfo();
-
-		twgl.resizeCanvasToDisplaySize(this.gl.canvas);
-	    this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
-	    this.gl.useProgram(this.programInfo.program);
-	    twgl.setUniforms(this.programInfo, uniforms);
-	    twgl.setBuffersAndAttributes(this.gl, this.programInfo, bufferInfo);
-	    twgl.drawBufferInfo(this.gl, this.drawingMethod, bufferInfo);
-
+		this.display(time);
 	    requestAnimationFrame(_draw.bind(this));
 	}
 

@@ -5,8 +5,15 @@ function main(){
 
 	// entity.draw();
 
-	var text = new LabEntity({x : 100, y : 100})
-	text.draw();
+	
+
+	var generateLab = function() {
+		var text = new LabEntity({x : Math.random() * 600, y : 700})
+		text.draw();
+		setTimeout(generateLab, 1000);
+	}
+
+	setTimeout(generateLab, 1000);
 
 	// var textEntity = new TextEntity({x : -.5, y : -.3}, "Hello world");
 	// textEntity.draw();
