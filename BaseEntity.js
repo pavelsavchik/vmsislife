@@ -13,9 +13,13 @@ class BaseEntity {
 	 //        "}\n";
 
 	    this.gl = twgl.getWebGLContext($("#glcanvas")[0]);
-
+	    this.maxY = this.gl.canvas.height;
 		this.programInfo = twgl.createProgramInfo(this.gl, ["vs-entity", "fs-entity"]);
 		this.drawingMethod = this.gl.TRIANGLES;
+
+		this.mapToRange = (number, index, array, fromMin = 0, fromMax = this.gl.canvas.height, toMin = -1, toMax = 1) => 
+			(index + 1) % 3 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+		this.absoluteToRelative = array => array.map(this.mapToRange);
 	}
 };
 

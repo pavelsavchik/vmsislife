@@ -1,9 +1,15 @@
 function main(){
 	"use strict";
 
-	var entity = new ActionEntity({x : -1, y : -1, step : .02});
+	// var entity = new ActionEntity({x : -1, y : -1, step : .02});
 
-	entity.draw();
+	// entity.draw();
+
+	var text = new LabEntity({x : 100, y : 100})
+	text.draw();
+
+	// var textEntity = new TextEntity({x : -.5, y : -.3}, "Hello world");
+	// textEntity.draw();
 
 	$(document).keydown(function(event) {
 	    switch(event.which || event.keyCode) {	
@@ -25,7 +31,7 @@ function main(){
 
 	        default: return; // exit this handler for other keys
 	    }
-	    // e.preventDefault(); // prevent the default action (scroll / move caret)
+	    event.preventDefault(); // prevent the default action (scroll / move caret)
 	});
 
 	$(document).keyup(function(event) {
@@ -35,7 +41,7 @@ function main(){
 	    		break;
 	    	default: return;
 		}
-	 	e.preventDefault();
+	 	event.preventDefault();
 	})
 
 };

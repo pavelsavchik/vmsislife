@@ -44,6 +44,7 @@
 <script src="./jquery.js"></script>
 <script src="./BaseEntity.js"></script>
 <script src="./ActionEntity.js"></script>
+<script src="./LabEntity.js"></script>
 <script src="./main.js"></script>
 
 <script type="text/javascript">
@@ -55,9 +56,20 @@
 });
 </script>
 
+<style>
+  #text {
+    position: absolute;
+    left:0px;
+    top:0px;
+    z-index:100;
+    width : 200px;
+  }
+</style>
+
 <body>
   <canvas id="glcanvas">
     Your browser doesn't appear to support the 
     <code>&lt;canvas&gt;</code> element.
   </canvas>
+  <canvas id="text"></canvas>
 </body>
