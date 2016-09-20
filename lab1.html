@@ -1,0 +1,63 @@
+<script id="vs" type="notjs">
+    attribute vec4 position;
+    uniform float time; 
+
+    void main() {
+      gl_Position = position;
+    } 
+</script>
+<script id="fs" type="notjs">
+    precision mediump float;
+    uniform float color; 
+
+    void main() {
+      // gl_FragColor is a special variable a fragment shader
+      // is responsible for setting
+      gl_FragColor = vec4(0, 0, 0, 1); // return redish-purple
+    }
+</script>
+
+<script id="vs-entity" type="notjs">
+    attribute vec4 position;
+    attribute vec4 aVertexColor;
+
+    varying lowp vec4 vColor;
+
+    void main() {
+      vColor = aVertexColor;
+      gl_Position = position;
+    } 
+</script>
+<script id="fs-entity" type="notjs">
+    precision mediump float;
+    varying lowp vec4 vColor;
+
+    void main() {
+      // gl_FragColor is a special variable a fragment shader
+      // is responsible for setting
+      // gl_FragColor = vec4(0, 0, 0, 1); // return redish-purple
+      gl_FragColor = vColor;
+    }
+</script>
+
+<script src="./twgl-full.js" ></script>
+<script src="./jquery.js"></script>
+<script src="./BaseEntity.js"></script>
+<script src="./ActionEntity.js"></script>
+<script src="./main.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#glcanvas").width($(document).width() - 20);
+    $("#glcanvas").height($(document).height() - 20);
+
+    main();
+});
+</script>
+
+<body>
+  <canvas id="glcanvas">
+    Your browser doesn't appear to support the 
+    <code>&lt;canvas&gt;</code> element.
+  </canvas>
+</body>
