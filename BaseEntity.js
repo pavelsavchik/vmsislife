@@ -19,7 +19,10 @@ class BaseEntity {
 
 		this.mapToRange = (number, index, array, fromMin = 0, fromMax = this.gl.canvas.height, toMin = -1, toMax = 1) => 
 			(index + 1) % 3 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+		this.mapColor = (number, index, array, fromMin = 0, fromMax = 256, toMin = 0, toMax = 1) => 
+			(index + 1) % 4 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
 		this.absoluteToRelative = array => array.map(this.mapToRange);
+		this.convertColors = array => array.map(this.mapColor);
 
 		this.display = function(time) {
 			var uniforms = {

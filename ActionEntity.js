@@ -28,6 +28,9 @@ class ActionEntity extends BaseEntity {
 ActionEntity.prototype.getArrays = function(x, y) {
 	var size = 0.1
 	return  {
-	   position: this.absoluteToRelative([0, this.maxY, 0, 20, 0, 0, 0, 0, 0])
+	   position: this.absoluteToRelative([0, this.maxY, 0, 20, 0, 0, 0, 0, 0]),
+	   color : this.convertColors([255,255,255,1,
+	   			100,232,134,1,
+	   			10,1,250,1,])
 	};
 }

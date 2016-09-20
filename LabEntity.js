@@ -79,7 +79,8 @@ LabEntity.prototype.getArrays = function(x, y) {
 	var size = 10;
 	var positions = this.getLetterL(x - 35, y).concat(this.getLetterA(x, y).concat(this.getLetterB(x + 20, y)));
 	return  {
-	   position: this.absoluteToRelative(positions)
+	   position: this.absoluteToRelative(positions),
+	   // color: []
 	};
 };
 
