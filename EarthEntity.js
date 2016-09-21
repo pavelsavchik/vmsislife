@@ -8,9 +8,19 @@ class EarthEntity extends BaseEntity {
 EarthEntity.prototype.getArrays = function(x, y) {
 	var positions = this.formEarth(x - 20, y);
 	return  {
-	   position: this.absoluteToRelative(positions)
+	   position: this.absoluteToRelative(positions),
+	   color : this.convertColors([
+
+	   		0, 100, 0, 1,
+	   		0, 100, 0, 1,
+	   		0, 100, 0, 1,
+
+	   		0, 100, 0, 1,
+	   		0, 100, 0, 1,
+	   		0, 100, 0, 1
+	   	])
 	};
-}
+};
 
 EarthEntity.prototype.formEarth = function(x, y) {
 	return [

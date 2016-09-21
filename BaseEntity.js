@@ -41,6 +41,8 @@ class BaseEntity {
 		    twgl.setBuffersAndAttributes(this.gl, this.programInfo, bufferInfo);
 		    twgl.drawBufferInfo(this.gl, this.drawingMethod, bufferInfo);
 		};
+
+		this.getPosition = () => position;
 	}
 };
 

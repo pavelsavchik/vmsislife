@@ -45,7 +45,9 @@ function main(){
 	$(document).keyup(function(event) {
 		switch(event.which || event.keyCode) {
 			case 32:
-	    		entity.jump();
+				// var vedoma = new VedomaEntity($.extend({}, entity.getPosition()));
+				// vedoma.draw();
+	    		entity.fire();
 	    		break;
 	    	default: return;
 		}

@@ -2,21 +2,21 @@ class ActionEntity extends BaseEntity {
 	constructor(position) {
 		super(position);
 
-		this.jump = function() {
-			var n = 11;
-			if (!this.inJump) {
-				this.inJump = true;
-				(function _jump() {
-					n > 5 ? this.top() : this.down();
-					this.left();
-					if (n-- > 0) {
-						setTimeout(_jump.bind(this), 5);
-					} else {
-						this.inJump = false;
-					}
-				}.bind(this))();
-			}
-		};
+		// this.jump = function() {
+		// 	var n = 11;
+		// 	if (!this.inJump) {
+		// 		this.inJump = true;
+		// 		(function _jump() {
+		// 			n > 5 ? this.top() : this.down();
+		// 			this.left();
+		// 			if (n-- > 0) {
+		// 				setTimeout(_jump.bind(this), 5);
+		// 			} else {
+		// 				this.inJump = false;
+		// 			}
+		// 		}.bind(this))();
+		// 	}
+		// };
 
 		this.left = () => this.isInBorder(position.x + position.step) ? position.x += position.step : false;
 		this.right = () => this.isInBorder(position.x - position.step) ? position.x -= position.step : false;
