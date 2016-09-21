@@ -95,8 +95,13 @@ var labColors = {
         255, 255, 255, 1,
         255, 255, 255, 1,
         255, 255, 255, 1,
-    ])
+    ]),
 };
+
+labColors.LABColors = labColors.LColors.concat(labColors.AColors.concat(labColors.BColors)),
+labColors.LAColors = labColors.LColors.concat(labColors.AColors),
+labColors.LBColors = labColors.LColors.concat(labColors.BColors),
+labColors.ABColors = labColors.AColors.concat(labColors.BColors)
 
 class LabEntity extends BaseEntity {
     constructor(position, answers) {
@@ -252,20 +257,13 @@ class LabEntity extends BaseEntity {
         }
 
         this.getColors = function() {
-        	var colors = [];
-
-        	if (this.renderL) {
-        		colors = labColors.LColors;
-        	}
-
-        	if (this.renderA) {
-        		colors = colors.concat(labColors.AColors);
-        	}
-
-        	if (this.renderB) {
-        		colors = colors.concat(labColors.BColors);
-        	}
-        	return colors;
+            return this.renderL && this.renderA && this.renderB ? labColors.LABColors :
+                this.renderL && this.renderA ? labColors.LAColors :
+                this.renderL && this.renderB ? labColors.LBColors :
+                this.renderB && this.renderA ? labColors.ABColors :
+                this.renderL ? labColors.LColors :
+                this.renderB ? labColors.BColors :
+                this.renderA ? labColors.AColors : [];
         }
     }
 }
