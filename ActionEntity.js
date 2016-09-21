@@ -2,35 +2,20 @@ class ActionEntity extends BaseEntity {
 	constructor(position) {
 		super(position);
 
-		// this.jump = function() {
-		// 	var n = 11;
-		// 	if (!this.inJump) {
-		// 		this.inJump = true;
-		// 		(function _jump() {
-		// 			n > 5 ? this.top() : this.down();
-		// 			this.left();
-		// 			if (n-- > 0) {
-		// 				setTimeout(_jump.bind(this), 5);
-		// 			} else {
-		// 				this.inJump = false;
-		// 			}
-		// 		}.bind(this))();
-		// 	}
-		// };
 
-		this.left = () => this.isInBorder(position.x + position.step) ? position.x += position.step : false;
-		this.right = () => this.isInBorder(position.x - position.step) ? position.x -= position.step : false;
-		this.down = () => this.isInBorder(position.y - position.step) ? position.y -= position.step : false;
-		this.top = () => this.isInBorder(position.y + position.step) ? position.y += position.step : false;
+		this.animate = function(coordinate, step, n = 5) {
+			var currentStep = step * n;
+			if (this.isInBorder(position[coordinate] + currentStep)) {
+				position[coordinate] += currentStep;
+				if (n > 0) {
+					setTimeout(this.animate.bind(this), 30, coordinate, step, n - 1);
+				}
+			}			
+		}
+
+		this.left = () => this.animate("x", position.step);
+		this.right = () => this.animate("x", - position.step);
+		this.down = () => this.animate("y", - position.step);
+		this.top = () => this.animate("y", position.step);
 	}
-}
-
-ActionEntity.prototype.getArrays = function(x, y) {
-	var size = 0.1
-	return  {
-	   position: this.absoluteToRelative([0, this.maxY, 0, 20, 0, 0, 0, 0, 0]),
-	   color : this.convertColors([255,255,255,1,
-	   			100,232,134,1,
-	   			10,1,250,1,])
-	};
-}
+};
