@@ -26,14 +26,16 @@ class BaseEntity {
 		this.absoluteToRelative = array => array.map(this.mapToRange);
 		this.convertColors = array => array.map(this.mapColor);
 
-		this.display = function(time) {
-			var uniforms = {
+		this.getUniforms = function(time) {
+			return {
 			      time: time * 0.1 % 360,
 			      middle : [this.position.x, this.position.y]
 			};
+		}
 
+		this.display = function(time) {
+			var uniforms = this.getUniforms(time);
 			var bufferInfo = this.getBufferInfo();
-
 			twgl.resizeCanvasToDisplaySize(this.gl.canvas);
 		    this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 		    this.gl.useProgram(this.programInfo.program);

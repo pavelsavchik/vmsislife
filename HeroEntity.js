@@ -1,9 +1,9 @@
 class HeroEntity extends ActionEntity {
     constructor(position) {
         super(position);
-
-        this.fire = function () {
-            var answer = new AnswerEntity({x: this.position.x, y: this.position.y});
+        
+        this.fire = function() {
+            var answer = new AnswerEntity( { x : this.position.x, y : this.position.y + 25} );
             answer.draw();
             return answer;
         }

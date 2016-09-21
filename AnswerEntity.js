@@ -1,13 +1,13 @@
 var answerColors = {
 	colors : (function() {
 		return Utils.convertColors([
-			   		0,255,0,1,
-			   		0,255,0,1,
-			   		0,255,0,1,
+			   		30,144,255,1,
+			   		30,144,255,1,
+			   		30,144,255,1,
 
-			   		0,255,0,1,
-			   		0,255,0,1,
-			   		0,255,0,1,
+			   		30,144,255,1,
+			   		30,144,255,1,
+			   		30,144,255,1,
 			   	])
 	})()
 }
@@ -29,6 +29,13 @@ class AnswerEntity extends BaseEntity {
 		};
 
 		this.valid = true;
+
+		this.getUniforms = function(time) {
+			return {
+				middle : [position.x, position.y],
+				radius : 7
+			};
+		}
 	}
 }
 
