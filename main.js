@@ -4,7 +4,7 @@ function main(){
 
 	Utils.resize();
 
-	var entity = new HeroEntity({x : 100, y : 100, step : 30});
+	var entity = new HeroEntity({x : 100, y : 120, step : 30});
 	entity.draw();
 
 	var earth = new EarthEntity({x: 0, y: 0});
