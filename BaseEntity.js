@@ -13,6 +13,10 @@ class BaseEntity {
 	 //        "}\n";
 
 	    this.gl = twgl.getWebGLContext($("#glcanvas")[0]);
+
+	    this.gl.enable(this.gl.BLEND);
+		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+
 	    this.maxY = this.gl.canvas.height;
 		this.programInfo = twgl.createProgramInfo(this.gl, [this.getVShader(), this.getFShader()]);
 		this.drawingMethod = this.gl.TRIANGLES;

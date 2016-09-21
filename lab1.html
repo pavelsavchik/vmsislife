@@ -107,6 +107,7 @@
 
     void main() {
       float distance = sqrt( pow( vMiddle.x - gl_FragCoord.x, 2.)  + pow( vMiddle.y - gl_FragCoord.y, 2. ) );
+      
       if (vRadius > distance) {
         gl_FragColor = vColor;  
       } else {
