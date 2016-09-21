@@ -1,11 +1,7 @@
-class HeroEntity extends BaseEntity {
-    constructor(position, text) {
+class HeroEntity extends ActionEntity {
+    constructor(position) {
         super(position);
         
-        this.left = () =>  position.x += position.step;
-        this.right = () => position.x -= position.step ;
-        this.down = () => position.y -= position.step;
-        this.top = () => position.y += position.step;
     }
     
     

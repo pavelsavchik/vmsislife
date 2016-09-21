@@ -4,23 +4,20 @@ function main(){
 
 	Utils.resize();
 
-	// var entity = new ActionEntity({x : 1, y : 1, step : .02});
+	var entity = new HeroEntity({x : 100, y : 100, step : 30});
 
-	// entity.draw();
+	entity.draw();
 
-	var earth = new EarthEntity({x: 100, y: 100});
+	var earth = new EarthEntity({x: 0, y: 0});
 	earth.draw();	
 
 	var generateLab = function() {
 		var text = new LabEntity({x : Math.random() * 600, y : 700})
 		text.draw();
-		setTimeout(generateLab, 1000);
+		setTimeout(generateLab, 500);
 	}
 
 	setTimeout(generateLab, 1000);
-
-	// var textEntity = new TextEntity({x : -.5, y : -.3}, "Hello world");
-	// textEntity.draw();
 
 	$(document).keydown(function(event) {
 	    switch(event.which || event.keyCode) {	
@@ -29,7 +26,7 @@ function main(){
 		        break;
 
 	        case 38:
-		        entity.top();
+		        // entity.top();
 		        break;
 
 	        case 39:
@@ -37,7 +34,7 @@ function main(){
 		        break;
 
 	        case 40:
-		        entity.down();
+		        // entity.down();
 		        break;
 
 	        default: return; // exit this handler for other keys

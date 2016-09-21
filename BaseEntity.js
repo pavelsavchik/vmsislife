@@ -75,7 +75,9 @@ BaseEntity.prototype.getArrays = function(x, y) {
 	};
 };
 
-BaseEntity.prototype.isInBorder = (coordinate) => coordinate <= 1 && coordinate >= -1;
+BaseEntity.prototype.isInBorder = function(coordinate) {
+	return coordinate >= 0 && coordinate <= this.maxY;
+};
 
 BaseEntity.prototype.getVShader = () => "vs-entity";
 BaseEntity.prototype.getFShader = () => "fs-entity";

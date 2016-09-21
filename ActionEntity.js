@@ -3,11 +3,11 @@ class ActionEntity extends BaseEntity {
 		super(position);
 
 		this.jump = function() {
-			var n = 21;
+			var n = 11;
 			if (!this.inJump) {
 				this.inJump = true;
 				(function _jump() {
-					n > 10 ? this.top() : this.down();
+					n > 5 ? this.top() : this.down();
 					this.left();
 					if (n-- > 0) {
 						setTimeout(_jump.bind(this), 5);
