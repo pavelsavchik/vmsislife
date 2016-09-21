@@ -295,9 +295,9 @@ LabEntity.prototype.draw = function () {
     function _draw(time) {
 
     	checkanswers.call(this);
-        this.position.y -= 1;
+        this.position.y -= 3;
         this.display(time);
-        if (this.position.y > 100 && (this.renderC || this.renderB || this.renderA)) {
+        if (this.position.y > 20 && (this.renderL || this.renderB || this.renderA)) {
             requestAnimationFrame(_draw.bind(this));
         }
     }
@@ -306,18 +306,18 @@ LabEntity.prototype.draw = function () {
 };
 
 LabEntity.prototype.clash = function(answerPos, labPos, labSize) {
-
-	if (this.renderA && Math.abs(answerPos.x - labPos.x) < labSize * 2 && Math.abs(answerPos.y - labPos.y) < labSize * 2) {
+    var labSizeM2 = labSize * 2;
+	if (this.renderA && Math.abs(answerPos.x - labPos.x) < labSizeM2 && Math.abs(answerPos.y - labPos.y) < labSizeM2) {
 		this.renderA = false;
 		return true;
 	}
 
-	if (this.renderB && Math.abs(answerPos.x - (labPos.x + labSize * 2)) < labSize * 2 && Math.abs(answerPos.y - labPos.y) < labSize * 2) {
+	if (this.renderB && Math.abs(answerPos.x - (labPos.x + labSizeM2)) < labSizeM2 && Math.abs(answerPos.y - labPos.y) < labSizeM2) {
 		this.renderB = false;
 		return true;
 	}
 
-	if (this.renderL && Math.abs(answerPos.x - (labPos.x - labSize * 2)) < labSize * 2 && Math.abs(labPos.y - answerPos.y) < labSize * 2) {
+	if (this.renderL && Math.abs(answerPos.x - (labPos.x - labSizeM2)) < labSizeM2 && Math.abs(labPos.y - answerPos.y) < labSizeM2) {
 		this.renderL = false;
 		return true;
 	}
