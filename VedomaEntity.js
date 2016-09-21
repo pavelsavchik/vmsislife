@@ -13,6 +13,8 @@ class VedomaEntity extends BaseEntity {
 				x - size, y - size, 1,
 			];
 		};
+
+		this.valid = true;
 	}
 }
 
@@ -49,8 +51,10 @@ VedomaEntity.prototype.draw = function() {
 	function _draw(time) {
 		this.position.y += 5;
 		this.display(time);
-		if (this.position.y < this.maxY) {
+		if (this.valid && this.position.y < this.maxY) {
 	    	requestAnimationFrame(_draw.bind(this));
+		} else {
+			this.valid = false;
 		}
 	}
 

@@ -1,6 +1,9 @@
 class LabEntity extends BaseEntity {
-    constructor(position, text) {
+    constructor(position, vedomas) {
         super(position);
+
+        this.vedomas = vedomas;
+
         var size = 15,
             sizeM3D4 = size * .75,
             sizeD2 = size / 2,
@@ -127,7 +130,6 @@ class LabEntity extends BaseEntity {
 
         ];
 
-        //fuck this letter
         this.getLetterB = function (x, y) {
             return [
                 x - size, y - size, 1,

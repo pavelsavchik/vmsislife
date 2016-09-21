@@ -5,6 +5,7 @@ class HeroEntity extends ActionEntity {
         this.fire = function() {
             var vedoma = new VedomaEntity( { x : this.position.x, y : this.position.y} );
             vedoma.draw();
+            return vedoma;
         }
     }    
     

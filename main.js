@@ -5,14 +5,15 @@ function main(){
 	Utils.resize();
 
 	var entity = new HeroEntity({x : 100, y : 100, step : 30});
-
 	entity.draw();
 
 	var earth = new EarthEntity({x: 0, y: 0});
 	earth.draw();	
 
+	var vedomas = [];
+
 	var generateLab = function() {
-		var text = new LabEntity({x : Math.random() * 600, y : 700})
+		var text = new LabEntity({x : Math.random() * 600, y : 700}, vedomas);
 		text.draw();
 		setTimeout(generateLab, 500);
 	}
@@ -47,7 +48,7 @@ function main(){
 			case 32:
 				// var vedoma = new VedomaEntity($.extend({}, entity.getPosition()));
 				// vedoma.draw();
-	    		entity.fire();
+	    		vedomas.push(entity.fire());
 	    		break;
 	    	default: return;
 		}
