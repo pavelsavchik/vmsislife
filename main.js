@@ -10,10 +10,10 @@ function main(){
 	var earth = new EarthEntity({x: 0, y: 0});
 	earth.draw();	
 
-	var vedomas = [];
+	var answers = [];
 
 	var generateLab = function() {
-		var text = new LabEntity({x : Math.random() * 600, y : 700}, vedomas);
+		var text = new LabEntity({x : Math.random() * 600, y : 700}, answers);
 		text.draw();
 		setTimeout(generateLab, 2000);
 	}
@@ -46,7 +46,7 @@ function main(){
 	$(document).keyup(function(event) {
 		switch(event.which || event.keyCode) {
 			case 32:
-	    		vedomas.push(entity.fire());
+	    		answers.push(entity.fire());
 	    		break;
 	    	default: return;
 		}

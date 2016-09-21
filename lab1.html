@@ -79,6 +79,29 @@
     }
 </script>
 
+<script id="vs-answer" type="notjs">
+    attribute vec4 position;
+    attribute vec4 color;
+
+    varying lowp vec4 vColor;
+
+    void main() {
+      vColor = color;
+      gl_Position = position;
+    } 
+</script>
+<script id="fs-answer" type="notjs">
+    precision mediump float;
+    varying lowp vec4 vColor;
+
+    void main() {
+      // gl_FragColor is a special variable a fragment shader
+      // is responsible for setting
+      // gl_FragColor = vec4(0, 0, 0, 1); // return redish-purple
+      gl_FragColor = vColor;
+    }
+</script>
+
 <script src="./twgl-full.js" ></script>
 <script src="./jquery.js"></script>
 <script src="./Utils.js"></script>
@@ -86,7 +109,7 @@
 <script src="./ActionEntity.js"></script>
 <script src="./LabEntity.js"></script>
 <script src="./EarthEntity.js"></script>
-<script src="./VedomaEntity.js"></script>
+<script src="./AnswerEntity.js"></script>
 <script src="./HeroEntity.js"></script>
 
 <script src="./main.js"></script>

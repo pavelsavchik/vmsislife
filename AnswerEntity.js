@@ -1,4 +1,4 @@
-var vedomaColors = {
+var answerColors = {
 	colors : (function() {
 		return Utils.convertColors([
 			   		0,255,0,1,
@@ -12,7 +12,7 @@ var vedomaColors = {
 	})()
 }
 
-class VedomaEntity extends BaseEntity {
+class AnswerEntity extends BaseEntity {
 	constructor(position) {
 		super(position);
 		var size = this.size = 10;
@@ -32,15 +32,15 @@ class VedomaEntity extends BaseEntity {
 	}
 }
 
-VedomaEntity.prototype.getArrays = function(x, y) {
+AnswerEntity.prototype.getArrays = function(x, y) {
 	var positions = this.getPositions(x, y);
 	return  {
 	   position: this.absoluteToRelative(positions),
-	   color : vedomaColors.colors
+	   color : answerColors.colors
 	};
 }
 
-VedomaEntity.prototype.draw = function() {
+AnswerEntity.prototype.draw = function() {
 	function _draw(time) {
 		this.position.y += 5;
 		this.display(time);
@@ -53,3 +53,6 @@ VedomaEntity.prototype.draw = function() {
 
 	requestAnimationFrame(_draw.bind(this));
 };
+
+AnswerEntity.prototype.getVShader = () => "vs-answer";
+AnswerEntity.prototype.getFShader = () => "fs-answer";

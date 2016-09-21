@@ -99,10 +99,10 @@ var labColors = {
 };
 
 class LabEntity extends BaseEntity {
-    constructor(position, vedomas) {
+    constructor(position, answers) {
         super(position);
 
-        this.vedomas = vedomas;
+        this.answers = answers;
 
         var size = this.size = 15,
             sizeM3D4 = size * .75,
@@ -279,22 +279,22 @@ LabEntity.prototype.getArrays = function (x, y) {
 
 LabEntity.prototype.draw = function () {
 
-	function checkVedomas () {
+	function checkanswers () {
 
-		for (var i = 0; i < this.vedomas.length; i++) {
-			let vedoma = this.vedomas[i];
-			if (vedoma.valid && this.clash(vedoma.position, this.position, this.size)) {
-				vedoma.valid = false;
+		for (var i = 0; i < this.answers.length; i++) {
+			let answer = this.answers[i];
+			if (answer.valid && this.clash(answer.position, this.position, this.size)) {
+				answer.valid = false;
 			}
-			if (!vedoma.valid) {
-				this.vedomas.splice(i--, 1);
+			if (!answer.valid) {
+				this.answers.splice(i--, 1);
 			}
 		}
 	}
 
     function _draw(time) {
 
-    	checkVedomas.call(this);
+    	checkanswers.call(this);
         this.position.y -= 1;
         this.display(time);
         if (this.position.y > 100 && (this.renderC || this.renderB || this.renderA)) {
@@ -305,19 +305,19 @@ LabEntity.prototype.draw = function () {
     requestAnimationFrame(_draw.bind(this));
 };
 
-LabEntity.prototype.clash = function(vedomaPos, labPos, labSize) {
+LabEntity.prototype.clash = function(answerPos, labPos, labSize) {
 
-	if (this.renderA && Math.abs(vedomaPos.x - labPos.x) < labSize * 2 && Math.abs(vedomaPos.y - labPos.y) < labSize * 2) {
+	if (this.renderA && Math.abs(answerPos.x - labPos.x) < labSize * 2 && Math.abs(answerPos.y - labPos.y) < labSize * 2) {
 		this.renderA = false;
 		return true;
 	}
 
-	if (this.renderB && Math.abs(vedomaPos.x - (labPos.x + labSize * 2)) < labSize * 2 && Math.abs(vedomaPos.y - labPos.y) < labSize * 2) {
+	if (this.renderB && Math.abs(answerPos.x - (labPos.x + labSize * 2)) < labSize * 2 && Math.abs(answerPos.y - labPos.y) < labSize * 2) {
 		this.renderB = false;
 		return true;
 	}
 
-	if (this.renderL && Math.abs(vedomaPos.x - (labPos.x - labSize * 2)) < labSize * 2 && Math.abs(labPos.y - vedomaPos.y) < labSize * 2) {
+	if (this.renderL && Math.abs(answerPos.x - (labPos.x - labSize * 2)) < labSize * 2 && Math.abs(labPos.y - answerPos.y) < labSize * 2) {
 		this.renderL = false;
 		return true;
 	}
