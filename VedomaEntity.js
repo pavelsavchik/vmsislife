@@ -1,3 +1,17 @@
+var vedomaColors = {
+	colors : (function() {
+		return Utils.convertColors([
+			   		0,255,0,1,
+			   		0,255,0,1,
+			   		0,255,0,1,
+
+			   		0,255,0,1,
+			   		0,255,0,1,
+			   		0,255,0,1,
+			   	])
+	})()
+}
+
 class VedomaEntity extends BaseEntity {
 	constructor(position) {
 		super(position);
@@ -22,29 +36,8 @@ VedomaEntity.prototype.getArrays = function(x, y) {
 	var positions = this.getPositions(x, y);
 	return  {
 	   position: this.absoluteToRelative(positions),
-	   color : this.convertColors([
-	   		0,255,0,1,
-	   		0,255,0,1,
-	   		0,255,0,1,
-
-	   		0,255,0,1,
-	   		0,255,0,1,
-	   		0,255,0,1,
-	   	])
+	   color : vedomaColors.colors
 	};
-}
-
-VedomaEntity.prototype.formEarth = function(x, y) {
-	return [
-				0, 0, 1,
-				0, this.maxY / 10, 1,
-				this.maxY , this.maxY / 10, 1,
-
-				0, 0, 1,
-				this.maxY, 0, 1,
-				this.maxY , this.maxY / 10, 1,
-			
-	];		
 }
 
 VedomaEntity.prototype.draw = function() {

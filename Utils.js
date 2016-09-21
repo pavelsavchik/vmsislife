@@ -14,4 +14,12 @@ class Utils {
       canvas.height = displayHeight;
     }
   }
+
+  static mapColor(number, index, array, fromMin = 0, fromMax = 256, toMin = 0, toMax = 1) {
+    return (index + 1) % 4 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+  }
+
+  static convertColors(array) {
+    return array.map(Utils.mapColor);
+  }
 }

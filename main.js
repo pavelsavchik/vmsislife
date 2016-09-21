@@ -15,10 +15,10 @@ function main(){
 	var generateLab = function() {
 		var text = new LabEntity({x : Math.random() * 600, y : 700}, vedomas);
 		text.draw();
-		setTimeout(generateLab, 500);
+		setTimeout(generateLab, 2000);
 	}
 
-	setTimeout(generateLab, 1000);
+	setTimeout(generateLab, 2000);
 
 	$(document).keydown(function(event) {
 	    switch(event.which || event.keyCode) {	
@@ -46,8 +46,6 @@ function main(){
 	$(document).keyup(function(event) {
 		switch(event.which || event.keyCode) {
 			case 32:
-				// var vedoma = new VedomaEntity($.extend({}, entity.getPosition()));
-				// vedoma.draw();
 	    		vedomas.push(entity.fire());
 	    		break;
 	    	default: return;

@@ -1,10 +1,110 @@
+var labColors = {
+	
+	LColors : Utils.convertColors([
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+    ]),
+
+    AColors : Utils.convertColors([
+
+        255, 0, 0, 1,
+        255, 0, 0, 1,
+        255, 0, 0, 1,
+
+        255, 0, 0, 1,
+        255, 0, 0, 1,
+        255, 0, 0, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+    ]),
+
+    BColors : Utils.convertColors([
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+        0, 0, 0, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+        255, 255, 255, 1,
+    ])
+};
+
 class LabEntity extends BaseEntity {
     constructor(position, vedomas) {
         super(position);
 
         this.vedomas = vedomas;
 
-        var size = 15,
+        var size = this.size = 15,
             sizeM3D4 = size * .75,
             sizeD2 = size / 2,
             sizeD4 = size / 4,
@@ -29,25 +129,7 @@ class LabEntity extends BaseEntity {
                 x + sizeD2, y - size, 1,
 
             ];
-        };
-
-        this.LColors = [
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-        ];
+        };       
 
         this.getLetterA = function (x, y) {
             return [
@@ -89,47 +171,7 @@ class LabEntity extends BaseEntity {
 
             ];
         };
-
-        this.AColors = [
-
-            255, 0, 0, 1,
-            255, 0, 0, 1,
-            255, 0, 0, 1,
-
-            255, 0, 0, 1,
-            255, 0, 0, 1,
-            255, 0, 0, 1,
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-        ];
-
+     
         this.getLetterB = function (x, y) {
             return [
                 x - size, y - size, 1,
@@ -187,79 +229,101 @@ class LabEntity extends BaseEntity {
             ];
         };
 
-        this.BColors = [
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
+        this.renderA = true;
+        this.renderB = true;
+        this.renderL = true;
 
-            0, 0, 0, 1,
-            0, 0, 0, 1,
-            0, 0, 0, 1,
+        this.getPositions = function(x, y) {
+        	var positions = [];
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        	if (this.renderL) {
+        		positions = this.getLetterL(x - size * 2, y);
+        	}
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        	if (this.renderA) {
+        		positions = positions.concat(this.getLetterA(x, y));
+        	}
 
+        	if (this.renderB) {
+        		positions = positions.concat(this.getLetterB(x + size * 2, y));
+        	}
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        	return this.absoluteToRelative(positions)
+        }
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        this.getColors = function() {
+        	var colors = [];
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        	if (this.renderL) {
+        		colors = labColors.LColors;
+        	}
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
+        	if (this.renderA) {
+        		colors = colors.concat(labColors.AColors);
+        	}
 
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-            255, 255, 255, 1,
-
-            // 0,0,0,1,
-            // 0,0,0,1,
-            // 0,0,0,1,
-
-            // 0,0,0,1,
-            // 0,0,0,1,
-            // 0,0,0,1,
-        ];
-
-        this.colors = this.convertColors(this.LColors.concat(this.AColors.concat(this.BColors)));
+        	if (this.renderB) {
+        		colors = colors.concat(labColors.BColors);
+        	}
+        	return colors;
+        }
     }
 }
 
 LabEntity.prototype.getArrays = function (x, y) {
-    var size = 15;
-    var positions = this.getLetterL(x - size * 2, y).concat(this.getLetterA(x, y).concat(this.getLetterB(x + size * 2, y)));
-    // var colors = this.LColors.concat(this.AColors.concat(this.getLetterBColors()));
     return {
-        position: this.absoluteToRelative(positions),
-        // position: (positions),
-        color: this.colors
+        position: this.getPositions(x, y),
+        color: this.getColors()
     };
 };
 
 LabEntity.prototype.draw = function () {
+
+	function checkVedomas () {
+
+		for (var i = 0; i < this.vedomas.length; i++) {
+			let vedoma = this.vedomas[i];
+			if (vedoma.valid && this.clash(vedoma.position, this.position, this.size)) {
+				vedoma.valid = false;
+			}
+			if (!vedoma.valid) {
+				this.vedomas.splice(i--, 1);
+			}
+		}
+	}
+
     function _draw(time) {
-        this.position.y -= 3;
+
+    	checkVedomas.call(this);
+        this.position.y -= 1;
         this.display(time);
-        if (this.position.y > 100) {
+        if (this.position.y > 100 && (this.renderC || this.renderB || this.renderA)) {
             requestAnimationFrame(_draw.bind(this));
         }
     }
 
     requestAnimationFrame(_draw.bind(this));
 };
+
+LabEntity.prototype.clash = function(vedomaPos, labPos, labSize) {
+
+	if (this.renderA && Math.abs(vedomaPos.x - labPos.x) < labSize * 2 && Math.abs(vedomaPos.y - labPos.y) < labSize * 2) {
+		this.renderA = false;
+		return true;
+	}
+
+	if (this.renderB && Math.abs(vedomaPos.x - (labPos.x + labSize * 2)) < labSize * 2 && Math.abs(vedomaPos.y - labPos.y) < labSize * 2) {
+		this.renderB = false;
+		return true;
+	}
+
+	if (this.renderL && Math.abs(vedomaPos.x - (labPos.x - labSize * 2)) < labSize * 2 && Math.abs(labPos.y - vedomaPos.y) < labSize * 2) {
+		this.renderL = false;
+		return true;
+	}
+
+	return false;
+}; 
 
 
 // LabEntity.prototype.getVShader = () => "vs-lab";
