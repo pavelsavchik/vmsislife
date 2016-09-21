@@ -3,10 +3,9 @@ class ActionEntity extends BaseEntity {
 		super(position);
 
 
-		this.animate = function(coordinate, step, n = 5) {
-			var currentStep = step * n;
-			if (this.isInBorder(position[coordinate] + currentStep)) {
-				position[coordinate] += currentStep;
+		this.animate = function(coordinate, step, n = 7) {
+			if (this.isInBorder(position[coordinate] + step)) {
+				position[coordinate] += step;
 				if (n > 0) {
 					setTimeout(this.animate.bind(this), 30, coordinate, step, n - 1);
 				}
