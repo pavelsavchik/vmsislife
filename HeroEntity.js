@@ -155,18 +155,5 @@ HeroEntity.prototype.formHero = function (x, y) {
         x + sizeD4, y - sizeD2 - size, 1,
         x - sizeD4, y - sizeD2 - size, 1,
         x, y - sizeD2 - sizeD4, 1,
-
-        //eyes
-        x + sizeD2, y - sizeD2, 1,
-        x - sizeD2, y - sizeD2, 1,
-        x - sizeD2, y - sizeD2 - size, 1,
-
-        x + sizeD2, y - sizeD2, 1,
-        x + sizeD2, y - sizeD2 - size, 1,
-        x - sizeD2, y - sizeD2 - size, 1,
-
-
-
-
     ];
 }
