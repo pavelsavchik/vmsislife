@@ -18,7 +18,7 @@ function main(){
 	var generateLab = function() {
 		var text = new LabEntity({x : 50 + Math.random() * 550, y : 700}, answers);
 		text.draw();
-		setTimeout(generateLab, 500);
+		setTimeout(generateLab, 2000);
 	}
 
 	setTimeout(generateLab, 2000);

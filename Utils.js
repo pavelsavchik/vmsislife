@@ -15,6 +15,10 @@ class Utils {
     }
   }
 
+  static random(from, to) {
+    return Math.random() * (to - from) + from;
+  }
+
   static mapColor(number, index, array, fromMin = 0, fromMax = 256, toMin = 0, toMax = 1) {
     return (index + 1) % 4 === 0 ? number : (number - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
   }

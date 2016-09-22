@@ -293,7 +293,7 @@ LabEntity.prototype.draw = function () {
     function _draw(time) {
 
     	checkanswers.call(this);
-        this.position.y -= 3;
+        this.position.y -= 1;
         this.display(time);
         if (this.position.y > 20 && (this.renderL || this.renderB || this.renderA)) {
             requestAnimationFrame(_draw.bind(this));
@@ -307,21 +307,36 @@ LabEntity.prototype.clash = function(answerPos, labPos, labSize) {
     var labSizeM2 = labSize * 2;
 	if (this.renderA && Math.abs(answerPos.x - labPos.x) < labSizeM2 && Math.abs(answerPos.y - labPos.y) < labSizeM2) {
 		this.renderA = false;
+        this.drawFragment(labPos);
 		return true;
 	}
 
 	if (this.renderB && Math.abs(answerPos.x - (labPos.x + labSizeM2)) < labSizeM2 && Math.abs(answerPos.y - labPos.y) < labSizeM2) {
 		this.renderB = false;
+        this.drawFragment({
+            x : labPos.x + labSizeM2,
+            y : labPos.y
+        });
 		return true;
 	}
 
 	if (this.renderL && Math.abs(answerPos.x - (labPos.x - labSizeM2)) < labSizeM2 && Math.abs(labPos.y - answerPos.y) < labSizeM2) {
 		this.renderL = false;
+        this.drawFragment({
+            x : labPos.x - labSizeM2,
+            y : labPos.y
+        });
 		return true;
 	}
 
 	return false;
-}; 
+};
+
+
+LabEntity.prototype.drawFragment = function(position) {
+    var fragment = new FragmentEntity(position);
+    fragment.draw();
+}
 
 
 // LabEntity.prototype.getVShader = () => "vs-lab";
