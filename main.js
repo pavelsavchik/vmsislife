@@ -8,7 +8,10 @@ function main(){
 	entity.draw();
 
 	var earth = new EarthEntity({x: 0, y: 0});
-	earth.draw();	
+	earth.draw();
+
+	var deadline = new DeadlineEntity({x : 300, y:30});
+	deadline.draw();
 
 	var answers = [];
 

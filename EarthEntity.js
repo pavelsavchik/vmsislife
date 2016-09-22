@@ -11,13 +11,13 @@ EarthEntity.prototype.getArrays = function(x, y) {
 	   position: this.absoluteToRelative(positions),
 	   color : this.convertColors([
 
-	   		0, 100, 0, 1,
-	   		0, 100, 0, 1,
-	   		0, 100, 0, 1,
+	   		0, 0, 0, 1,
+	   		0, 0, 0, 1,
+	   		0, 0, 0, 1,
 
-	   		0, 100, 0, 1,
-	   		0, 100, 0, 1,
-	   		0, 100, 0, 1
+	   		0, 0, 0, 1,
+	   		0, 0, 0, 1,
+	   		0, 0, 0, 1
 	   	])
 	};
 };
