@@ -3,7 +3,7 @@
 // ------------------------------------- //
 
 // scene object variables
-var renderer, scene, camera, pointLight, spotLight;
+var renderer, scene, camera, pointLight;
 
 // field variables
 var fieldWidth = 200, fieldHeight = 200;
@@ -14,16 +14,12 @@ var paddle1DirX = 0, paddle1DirY = 0, paddleSpeed = 3;
 
 
 // ball variables
-var ball, paddle1, paddle2;
-var ballDirX = 1, ballDirY = 1, ballSpeed = 2;
+var ball, paddle1;
 
 // game-related variables
-var score1 = 0, score2 = 0;
+var score = 0;
 // you can change this to any positive whole number
-var maxScore = 7;
-
-// set opponent reflexes (0 - easiest, 1 - hardest)
-var difficulty = 0.2;
+var maxScore = 20;
 
 // ------------------------------------- //
 // ------- GAME FUNCTIONS -------------- //
@@ -31,28 +27,19 @@ var difficulty = 0.2;
 
 function setup()
 {
-	// update the board to reflect the max score for match win
-	//document.getElementById("winnerBoard").innerHTML = "First to " + maxScore + " wins!";
-
-	// now reset player and opponent scores
-	score1 = 0;
-	score2 = 0;
-
-	// set up all the 3D objects in the scene
+	score = 0;
 	createScene();
-
-	// and let's get cracking!
 	draw();
 }
 
 
 function createScene()
 {
-	// set the scene size
+	// scene size
 	var WIDTH = 640,
 		HEIGHT = 360;
 
-	// set some camera attributes
+	// camera attributes
 	var VIEW_ANGLE = 50,
 		ASPECT = WIDTH / HEIGHT,
 		NEAR = 0.1,
@@ -60,8 +47,6 @@ function createScene()
 
 	var c = document.getElementById("gameCanvas");
 
-	// create a WebGL renderer, camera
-	// and a scene
 	renderer = new THREE.WebGLRenderer();
 	camera =
 		new THREE.PerspectiveCamera(
@@ -72,12 +57,7 @@ function createScene()
 
 	scene = new THREE.Scene();
 
-	// add the camera to the scene
 	scene.add(camera);
-
-	// set a default position for the camera
-	// not doing this somehow messes up shadow rendering
-	camera.position.z = 320;
 
 	// start the renderer
 	renderer.setSize(WIDTH, HEIGHT);
@@ -230,25 +210,19 @@ function createScene()
 
 function draw()
 {
-	// draw THREE.JS scene
 	renderer.render(scene, camera);
-	// loop draw function call
 	requestAnimationFrame(draw);
     //
-	//ballPhysics();
-	//paddlePhysics();
 	cameraPhysics();
 	playerPaddleMovement();
 }
 
 function cameraPhysics()
 {
-	// we can easily notice shadows if we dynamically move lights during the game
-
-	// move to behind the player's paddle
+	//TODO: Dynamic camera?
 	camera.position.x = -300;
 	camera.position.y = 0;
-	camera.position.z = 200;
+	camera.position.z = 300;
 
 	// rotate to face towards the opponent
 	camera.rotation.x = -0.01 * (ball.position.y) * Math.PI/180;
@@ -258,9 +232,11 @@ function cameraPhysics()
 
 function playerPaddleMovement()
 {
+	var isMoves = false;
 	// move left
 	if (Key.isDown(Key.A))
 	{
+		isMoves = true;
 		// if paddle is not touching the side of table
 		// we move
 		if (paddle1.position.y < fieldHeight * 0.45)
@@ -278,6 +254,7 @@ function playerPaddleMovement()
 	// move right
 	else if (Key.isDown(Key.D))
 	{
+		isMoves = true;
 		// if paddle is not touching the side of table
 		// we move
 		if (paddle1.position.y > -fieldHeight * 0.45)
@@ -294,8 +271,9 @@ function playerPaddleMovement()
 	}
 
 	// move up
-	else if (Key.isDown(Key.W))
+	if (Key.isDown(Key.W))
 	{
+		isMoves = true;
 		// if paddle is not touching the side of table
 		// we move
 		if (paddle1.position.x < fieldWidth * 0.45)
@@ -313,6 +291,7 @@ function playerPaddleMovement()
 	// move down
 	else if (Key.isDown(Key.S))
 	{
+		isMoves = true;
 		// if paddle is not touching the side of table
 		// we move
 		if (paddle1.position.x > -fieldWidth * 0.45)
@@ -328,9 +307,14 @@ function playerPaddleMovement()
 		}
 	}
 
+	if (Key.isDown(Key.SPACE))
+	{
+		alert("piy piy");
+		while(Key.isDown(Key.SPACE));
+	}
 
 	// else don't move paddle
-	else
+	if(!isMoves)
 	{
 		// stop the paddle
 		paddle1DirY = 0;
@@ -339,7 +323,7 @@ function playerPaddleMovement()
 
 	paddle1.scale.y += (1 - paddle1.scale.y) * 0.2;
 	paddle1.scale.z += (1 - paddle1.scale.z) * 0.2;
-	paddle1.position.y += paddle1DirY;
 
+	paddle1.position.y += paddle1DirY;
 	paddle1.position.x += paddle1DirX;
 }
