@@ -214,24 +214,6 @@ function createScene()
 	// lift paddles over playing surface
 	paddle1.position.z = paddleDepth;
 
-	// finally we finish by adding a ground plane
-	// to show off pretty shadows
-	var ground = new THREE.Mesh(
-
-		new THREE.CubeGeometry(
-			1000,
-			1000,
-			3,
-			1,
-			1,
-			1 ),
-
-		groundMaterial);
-	// set ground to arbitrary z position to best show off shadowing
-	ground.position.z = -132;
-	ground.receiveShadow = true;
-	scene.add(ground);
-
 	// // create a point light
 	pointLight =
 		new THREE.PointLight(0xF8D898);
@@ -264,9 +246,9 @@ function cameraPhysics()
 	// we can easily notice shadows if we dynamically move lights during the game
 
 	// move to behind the player's paddle
-	camera.position.x = paddle1.position.x - 100;
-	camera.position.y += (paddle1.position.y - camera.position.y) * 0.05;
-	camera.position.z = paddle1.position.z + 100 + 0.04 * (-ball.position.x + paddle1.position.x);
+	camera.position.x = -300;
+	camera.position.y = 0;
+	camera.position.z = 200;
 
 	// rotate to face towards the opponent
 	camera.rotation.x = -0.01 * (ball.position.y) * Math.PI/180;
