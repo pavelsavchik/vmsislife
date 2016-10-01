@@ -39,12 +39,26 @@ function answersMovement() {
 }
 
 function answersPhysics() {
+    var removedAnswerIndexes = [];
     for (var i = 0; i < answers.length; i++) {
         for (var j = 0; j < labs.length; j++) {
             if (answers[i].position.x > labs[j].position.x - 50 && answers[i].position.x < labs[j].position.x + 50
-                && answers[i].position.y > labs[j].position.y - 50 && answers[i].position.y < labs[j].position.y + 50) {
+                && answers[i].position.y > labs[j].position.y - 50 && answers[i].position.y < labs[j].position.y + 50
+                && answers[i].position.z >= labs[j].position.z
+            ) {
                 labs[j].material.color.setHex(0xff0000);
+                removedAnswerIndexes.push(i);
+                removeLab(j);
             }
         }
+    }
+
+    removeAnswers(removedAnswerIndexes)
+}
+
+function removeAnswers(indexArray) {
+    for (var i = indexArray.length - 1; i >= 0; i--) {
+        scene.remove(answers[indexArray[i]]);
+        answers.splice(i,1);
     }
 }

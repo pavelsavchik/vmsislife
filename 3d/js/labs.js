@@ -43,7 +43,7 @@ function labsMovement() {
         labs[i].position.z--;
     }
 
-    if(labs[0].position.z < -10) {
+    if(labs.length && labs[0].position.z < -10) {
         //remove first lab from scene
         scene.remove(labs[0]);
 
@@ -51,6 +51,12 @@ function labsMovement() {
         labs.splice(0,1);
     }
 }
+
+function removeLab(index) {
+    scene.remove(labs[index]);
+    labs.splice(index,1);
+}
+
 
 function initLabs() {
     THREE.Cache.enabled = true;
