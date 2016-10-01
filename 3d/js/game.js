@@ -6,11 +6,11 @@
 var renderer, scene, camera, pointLight;
 
 // field variables
-var fieldWidth = 200, fieldHeight = 200;
+var fieldWidth = 300, fieldHeight = 300;
 
 // paddle variables
 var paddleWidth, paddleHeight, paddleDepth, paddleQuality;
-var paddle1DirX = 0, paddle1DirY = 0, paddleSpeed = 3;
+var paddle1DirX = 0, paddle1DirY = 0, paddleSpeed = 5;
 
 
 // ball variables
@@ -37,7 +37,7 @@ function createScene()
 {
 	// scene size
 	var WIDTH = 640,
-		HEIGHT = 360;
+		HEIGHT = 500;
 
 	// camera attributes
 	var VIEW_ANGLE = 50,
@@ -115,22 +115,7 @@ function createScene()
 		planeMaterial);
 
 	scene.add(plane);
-	plane.receiveShadow = true;
-
-	var table = new THREE.Mesh(
-
-		new THREE.CubeGeometry(
-			planeWidth * 1.05,	// this creates the feel of a billiards table, with a lining
-			planeHeight * 1.03,
-			100,				// an arbitrary depth, the camera can't see much of it anyway
-			planeQuality,
-			planeQuality,
-			1),
-
-		tableMaterial);
-	table.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
-	//scene.add(table);
-	table.receiveShadow = true;
+	//plane.receiveShadow = true;
 
 	// // set up the sphere vars
 	// lower 'segment' and 'ring' values will increase performance
@@ -162,12 +147,12 @@ function createScene()
 	ball.position.y = 0;
 	// set ball above the table surface
 	ball.position.z = radius;
-	ball.receiveShadow = true;
+	//ball.receiveShadow = true;
 	ball.castShadow = true;
 
 	// // set up the paddle vars
-	paddleWidth = 10;
-	paddleHeight = 10;
+	paddleWidth = 20;
+	paddleHeight = 20;
 	paddleDepth = 30;
 	paddleQuality = 1;
 
@@ -185,8 +170,8 @@ function createScene()
 
 	// // add the sphere to the scene
 	scene.add(paddle1);
-	paddle1.receiveShadow = true;
-	paddle1.castShadow = true;
+	//paddle1.receiveShadow = true;
+	//paddle1.castShadow = true;
 
 	// set paddles on each side of the table
 	paddle1.position.x = -fieldWidth/2 + paddleWidth;
@@ -206,6 +191,8 @@ function createScene()
 	pointLight.distance = 10000;
 	// add to the scene
 	scene.add(pointLight);
+
+	createLab()
 }
 
 function draw()
@@ -214,13 +201,14 @@ function draw()
 	requestAnimationFrame(draw);
     //
 	cameraPhysics();
+	labMovement();
 	playerPaddleMovement();
 }
 
 function cameraPhysics()
 {
 	//TODO: Dynamic camera?
-	camera.position.x = -300;
+	camera.position.x = -320;
 	camera.position.y = 0;
 	camera.position.z = 300;
 
@@ -310,7 +298,7 @@ function playerPaddleMovement()
 	if (Key.isDown(Key.SPACE))
 	{
 		alert("piy piy");
-		while(Key.isDown(Key.SPACE));
+		//while(Key.isDown(Key.SPACE));
 	}
 
 	// else don't move paddle
@@ -327,3 +315,4 @@ function playerPaddleMovement()
 	paddle1.position.y += paddle1DirY;
 	paddle1.position.x += paddle1DirX;
 }
+
