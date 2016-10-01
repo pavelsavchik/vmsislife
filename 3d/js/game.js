@@ -192,7 +192,7 @@ function createScene()
 	// add to the scene
 	scene.add(pointLight);
 
-	createLab()
+	initLabs();
 }
 
 function draw()
@@ -201,7 +201,7 @@ function draw()
 	requestAnimationFrame(draw);
     //
 	cameraPhysics();
-	labMovement();
+	labsMovement();
 	playerPaddleMovement();
 }
 
