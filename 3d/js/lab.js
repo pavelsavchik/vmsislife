@@ -1,4 +1,6 @@
 var labs = [];
+var labsFallingBorderX = fieldWidth * 0.8;
+var labsFallingBorderY = fieldHeight * 0.8;
 
 function createLab() {
 
@@ -20,8 +22,8 @@ function createLab() {
         var textMaterial = new THREE.MeshPhongMaterial({color: 0xffffff});
 
         var mesh = new THREE.Mesh(textGeo, textMaterial);
-        var x = Math.random() * 200;
-        var y = Math.random() * 200;
+        var x = (Math.random() - 0.5) * labsFallingBorderX;
+        var y = (Math.random() - 0.4) * labsFallingBorderY;
 
         mesh.position.set(x, y, 300);
 
@@ -39,7 +41,7 @@ function labsMovement() {
         labs[i].position.z--;
     }
 
-    if(labs[0].position.z < 0) {
+    if(labs[0].position.z < -10) {
         //remove first lab from scene
         scene.remove(labs[0]);
 

@@ -208,7 +208,7 @@ function draw()
 function cameraPhysics()
 {
 	//TODO: Dynamic camera?
-	camera.position.x = -320;
+	camera.position.x = -350;
 	camera.position.y = 0;
 	camera.position.z = 300;
 
