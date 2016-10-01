@@ -117,39 +117,6 @@ function createScene()
 	scene.add(plane);
 	//plane.receiveShadow = true;
 
-	// // set up the sphere vars
-	// lower 'segment' and 'ring' values will increase performance
-	var radius = 5,
-		segments = 6,
-		rings = 6;
-
-	// // create the sphere's material
-	var sphereMaterial =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0xD43001
-			});
-
-	// Create a ball with sphere geometry
-	ball = new THREE.Mesh(
-
-		new THREE.SphereGeometry(
-			radius,
-			segments,
-			rings),
-
-		sphereMaterial);
-
-	// // add the sphere to the scene
-	scene.add(ball);
-
-	ball.position.x = 0;
-	ball.position.y = 0;
-	// set ball above the table surface
-	ball.position.z = radius;
-	//ball.receiveShadow = true;
-	ball.castShadow = true;
-
 	// // set up the paddle vars
 	paddleWidth = 20;
 	paddleHeight = 20;
@@ -202,6 +169,7 @@ function draw()
     //
 	cameraPhysics();
 	labsMovement();
+	answersMovement();
 	playerPaddleMovement();
 }
 
@@ -213,7 +181,7 @@ function cameraPhysics()
 	camera.position.z = 300;
 
 	// rotate to face towards the opponent
-	camera.rotation.x = -0.01 * (ball.position.y) * Math.PI/180;
+	//camera.rotation.x = -0.01 * (ball.posicreateAnswer()tion.y) * Math.PI/180;
 	camera.rotation.y = -60 * Math.PI/180;
 	camera.rotation.z = -90 * Math.PI/180;
 }
@@ -310,7 +278,7 @@ function playerPaddleMovement()
 
 	if (Key.isDown(Key.SPACE))
 	{
-		alert("piy piy");
+		createAnswer()
 		//while(Key.isDown(Key.SPACE));
 	}
 
