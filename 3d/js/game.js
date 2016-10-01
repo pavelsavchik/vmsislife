@@ -288,7 +288,7 @@ function playerPaddleMovement()
 	}
 
 
-	if (Key.isDown(Key.SPACE))
+	if (Key.isUp(Key.SPACE))
 	{
 		createAnswer()
 		//while(Key.isDown(Key.SPACE));
