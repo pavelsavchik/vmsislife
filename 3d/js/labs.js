@@ -10,7 +10,7 @@ function createLab() {
 
             font: font,
             size: 30,
-            height: 4,
+            height: 7,
             curveSegments: 12,
 
             bevelThickness: 2,
@@ -30,6 +30,8 @@ function createLab() {
         mesh.rotation.x = 180 * Math.PI / 180;
         mesh.rotation.y = -90 * Math.PI / 180;
         mesh.rotation.z = 90 * Math.PI / 180;
+
+        mesh.castShadow = true;
 
         scene.add(mesh);
         labs.push(mesh);

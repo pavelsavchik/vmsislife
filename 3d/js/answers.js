@@ -28,7 +28,23 @@ function createAnswer() {
 }
 
 function answersMovement() {
+
     for (var i = 0; i < answers.length; i++) {
-        answers[i].position.z+=4;
+        answers[i].position.z += 4;
+        //if (answers.z > 300) {
+            ///answers[i]
+        //}
+    }
+
+}
+
+function answersPhysics() {
+    for (var i = 0; i < answers.length; i++) {
+        for (var j = 0; j < labs.length; j++) {
+            if (answers[i].position.x > labs[j].position.x - 50 && answers[i].position.x < labs[j].position.x + 50
+                && answers[i].position.y > labs[j].position.y - 50 && answers[i].position.y < labs[j].position.y + 50) {
+                labs[j].material.color.setHex(0xff0000);
+            }
+        }
     }
 }

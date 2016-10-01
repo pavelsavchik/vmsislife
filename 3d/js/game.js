@@ -115,7 +115,7 @@ function createScene()
 		planeMaterial);
 
 	scene.add(plane);
-	//plane.receiveShadow = true;
+	plane.receiveShadow = true;
 
 	// // set up the paddle vars
 	paddleWidth = 20;
@@ -160,6 +160,17 @@ function createScene()
 	scene.add(pointLight);
 
 	initLabs();
+
+
+
+	spotLight = new THREE.SpotLight(0xF8D898);
+	spotLight.position.set(0, 0, 460);
+	spotLight.intensity = 1.5;
+	spotLight.castShadow = true;
+	scene.add(spotLight);
+
+	renderer.shadowMapEnabled = true;
+
 }
 
 function draw()
@@ -168,6 +179,7 @@ function draw()
 	requestAnimationFrame(draw);
     //
 	cameraPhysics();
+	answersPhysics()
 	labsMovement();
 	answersMovement();
 	playerPaddleMovement();
