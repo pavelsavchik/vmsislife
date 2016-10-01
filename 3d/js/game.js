@@ -7,14 +7,10 @@ var renderer, scene, camera, pointLight;
 
 // field variables
 var fieldWidth = 300, fieldHeight = 300;
+var sceneWidth, sceneHeight; 
 
-// paddle variables
-var paddleWidth, paddleHeight, paddleDepth, paddleQuality;
-var paddle1DirX = 0, paddle1DirY = 0, paddleSpeed = 5;
-
-
-// ball variables
-var ball, paddle1;
+// student variables
+var studentDirX = 0, studentDirY = 0, studentSpeed = 5;
 
 // game-related variables
 var score = 0;
@@ -29,6 +25,10 @@ function setup()
 {
 	score = 0;
 	createScene();
+	createCamera();
+	createSurface();
+	createStudent();
+	initLabs();
 	draw();
 }
 
@@ -36,119 +36,17 @@ function setup()
 function createScene()
 {
 	// scene size
-	var WIDTH = 640,
-		HEIGHT = 500;
-
-	// camera attributes
-	var VIEW_ANGLE = 50,
-		ASPECT = WIDTH / HEIGHT,
-		NEAR = 0.1,
-		FAR = 10000;
-
-	var c = document.getElementById("gameCanvas");
+	sceneWidth = 640, sceneHeight = 500;
 
 	renderer = new THREE.WebGLRenderer();
-	camera =
-		new THREE.PerspectiveCamera(
-			VIEW_ANGLE,
-			ASPECT,
-			NEAR,
-			FAR);
-
 	scene = new THREE.Scene();
+	renderer.setSize(sceneWidth, sceneHeight);
 
-	scene.add(camera);
-
-	// start the renderer
-	renderer.setSize(WIDTH, HEIGHT);
-
-	// attach the render-supplied DOM element
+	var c = document.getElementById("gameCanvas");
 	c.appendChild(renderer.domElement);
 
-	// set up the playing surface plane
-	var planeWidth = fieldWidth,
-		planeHeight = fieldHeight,
-		planeQuality = 10;
-
-	// create the paddle1's material
-	var paddle1Material =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0x1B32C0
-			});
-
-	// create the plane's material
-	var planeMaterial =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0x4BD121
-			});
-	// create the table's material
-	var tableMaterial =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0x111111
-			});
-	// create the pillar's material
-	var pillarMaterial =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0x534d0d
-			});
-	// create the ground's material
-	var groundMaterial =
-		new THREE.MeshLambertMaterial(
-			{
-				color: 0x888888
-			});
-
-
-	// create the playing surface plane
-	var plane = new THREE.Mesh(
-
-		new THREE.PlaneGeometry(
-			planeWidth * 0.95,	// 95% of table width, since we want to show where the ball goes out-of-bounds
-			planeHeight,
-			planeQuality,
-			planeQuality),
-
-		planeMaterial);
-
-	scene.add(plane);
-	plane.receiveShadow = true;
-
-	// // set up the paddle vars
-	paddleWidth = 20;
-	paddleHeight = 20;
-	paddleDepth = 30;
-	paddleQuality = 1;
-
-	paddle1 = new THREE.Mesh(
-
-		new THREE.CubeGeometry(
-			paddleWidth,
-			paddleHeight,
-			paddleDepth,
-			paddleQuality,
-			paddleQuality,
-			paddleQuality),
-
-		paddle1Material);
-
-	// // add the sphere to the scene
-	scene.add(paddle1);
-	//paddle1.receiveShadow = true;
-	//paddle1.castShadow = true;
-
-	// set paddles on each side of the table
-	paddle1.position.x = -fieldWidth/2 + paddleWidth;
-
-	// lift paddles over playing surface
-	paddle1.position.z = paddleDepth;
-
 	// // create a point light
-	pointLight =
-		new THREE.PointLight(0xF8D898);
+	pointLight = new THREE.PointLight(0xF8D898);
 
 	// set its position
 	pointLight.position.x = -1000;
@@ -159,8 +57,6 @@ function createScene()
 	// add to the scene
 	scene.add(pointLight);
 
-	initLabs();
-
 
 
 	spotLight = new THREE.SpotLight(0xF8D898);
@@ -170,7 +66,6 @@ function createScene()
 	scene.add(spotLight);
 
 	renderer.shadowMapEnabled = true;
-
 }
 
 function draw()
@@ -178,15 +73,30 @@ function draw()
 	renderer.render(scene, camera);
 	requestAnimationFrame(draw);
     //
-	cameraPhysics();
+	// cameraPhysics();
 	answersPhysics()
 	labsMovement();
 	answersMovement();
 	playerPaddleMovement();
 }
 
-function cameraPhysics()
+function createCamera()
 {
+
+	// camera attributes
+	var VIEW_ANGLE = 50,
+		ASPECT = sceneWidth / sceneHeight,
+		NEAR = 0.1,
+		FAR = 10000;
+
+	camera = new THREE.PerspectiveCamera(
+			VIEW_ANGLE,
+			ASPECT,
+			NEAR,
+			FAR);
+
+	scene.add(camera);
+
 	//TODO: Dynamic camera?
 	camera.position.x = -350;
 	camera.position.y = 0;
@@ -205,43 +115,33 @@ function playerPaddleMovement()
 	if (Key.isDown(Key.A))
 	{
 		isMoves = true;
-		// if paddle is not touching the side of table
+		// if student is not touching the side of table
 		// we move
-		if (paddle1.position.y < fieldHeight * 0.45)
+		if (student.position.y < fieldHeight * 0.45)
 		{
-			paddle1DirY = paddleSpeed * 0.5;
-		}
-		// else we don't move and stretch the paddle
-		// to indicate we can't move
-		else
-		{
-			paddle1DirY = 0;
-			paddle1.scale.z += (10 - paddle1.scale.z) * 0.2;
+			studentDirY = studentSpeed * 0.5;
+		} else {
+			isMoves = false;
 		}
 	}
 	// move right
 	else if (Key.isDown(Key.D))
 	{
 		isMoves = true;
-		// if paddle is not touching the side of table
+		// if student is not touching the side of table
 		// we move
-		if (paddle1.position.y > -fieldHeight * 0.45)
+		if (student.position.y > -fieldHeight * 0.45)
 		{
-			paddle1DirY = -paddleSpeed * 0.5;
-		}
-		// else we don't move and stretch the paddle
-		// to indicate we can't move
-		else
-		{
-			paddle1DirY = 0;
-			paddle1.scale.z += (10 - paddle1.scale.z) * 0.2;
+			studentDirY = -studentSpeed * 0.5;
+		} else {
+			isMoves = false;
 		}
 	}
 
 	// else don't move
 	if(!isMoves)
 	{
-		paddle1DirY = 0;
+		studentDirY = 0;
 	}
 	isMoves = false;
 
@@ -249,42 +149,32 @@ function playerPaddleMovement()
 	if (Key.isDown(Key.W))
 	{
 		isMoves = true;
-		// if paddle is not touching the side of table
+		// if student is not touching the side of table
 		// we move
-		if (paddle1.position.x < fieldWidth * 0.45)
+		if (student.position.x < fieldWidth * 0.45)
 		{
-			paddle1DirX = paddleSpeed * 0.5;
-		}
-		// else we don't move and stretch the paddle
-		// to indicate we can't move
-		else
-		{
-			paddle1DirX = 0;
-			paddle1.scale.z += (10 - paddle1.scale.z) * 0.2;
+			studentDirX = studentSpeed * 0.5;
+		} else {
+			isMoves = false;
 		}
 	}
 	// move down
 	else if (Key.isDown(Key.S))
 	{
 		isMoves = true;
-		// if paddle is not touching the side of table
+		// if student is not touching the side of table
 		// we move
-		if (paddle1.position.x > -fieldWidth * 0.45)
+		if (student.position.x > -fieldWidth * 0.45)
 		{
-			paddle1DirX = -paddleSpeed * 0.5;
-		}
-		// else we don't move and stretch the paddle
-		// to indicate we can't move
-		else
-		{
-			paddle1DirX = 0;
-			paddle1.scale.z += (10 - paddle1.scale.z) * 0.2;
+			studentDirX = -studentSpeed * 0.5;
+		} else {
+			isMoves = false;
 		}
 	}
 
 	if(!isMoves)
 	{
-		paddle1DirX = 0;
+		studentDirX = 0;
 	}
 
 
@@ -295,10 +185,10 @@ function playerPaddleMovement()
 	}
 
 
-	paddle1.scale.y += (1 - paddle1.scale.y) * 0.2;
-	paddle1.scale.z += (1 - paddle1.scale.z) * 0.2;
+	student.scale.y += (1 - student.scale.y) * 0.2;
+	student.scale.z += (1 - student.scale.z) * 0.2;
 
-	paddle1.position.y += paddle1DirY;
-	paddle1.position.x += paddle1DirX;
+	student.position.y += studentDirY;
+	student.position.x += studentDirX;
 }
 

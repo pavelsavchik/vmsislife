@@ -19,8 +19,8 @@ function createAnswer() {
 
     var answer = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
-    answer.position.x = paddle1.position.x;
-    answer.position.y = paddle1.position.y;
+    answer.position.x = student.position.x;
+    answer.position.y = student.position.y;
     answer.position.z = 20;
     scene.add(answer);
 
