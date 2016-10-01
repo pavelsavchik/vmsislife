@@ -258,6 +258,13 @@ function playerPaddleMovement()
 		}
 	}
 
+	// else don't move
+	if(!isMoves)
+	{
+		paddle1DirY = 0;
+	}
+	isMoves = false;
+
 	// move up
 	if (Key.isDown(Key.W))
 	{
@@ -295,19 +302,18 @@ function playerPaddleMovement()
 		}
 	}
 
+	if(!isMoves)
+	{
+		paddle1DirX = 0;
+	}
+
+
 	if (Key.isDown(Key.SPACE))
 	{
 		alert("piy piy");
 		//while(Key.isDown(Key.SPACE));
 	}
 
-	// else don't move paddle
-	if(!isMoves)
-	{
-		// stop the paddle
-		paddle1DirY = 0;
-		paddle1DirX = 0;
-	}
 
 	paddle1.scale.y += (1 - paddle1.scale.y) * 0.2;
 	paddle1.scale.z += (1 - paddle1.scale.z) * 0.2;
