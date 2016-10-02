@@ -7,7 +7,7 @@ var renderer, scene, camera, pointLight;
 
 // field variables
 var fieldWidth = 300, fieldHeight = 300;
-var sceneWidth, sceneHeight; 
+var sceneWidth, sceneHeight, maxHeight = 300; 
 
 // student variables
 var studentDirX = 0, studentDirY = 0, studentSpeed = 5;
@@ -114,27 +114,19 @@ function playerPaddleMovement()
 	// move left
 	if (Key.isDown(Key.A))
 	{
-		isMoves = true;
-		// if student is not touching the side of table
-		// we move
 		if (student.position.y < fieldHeight * 0.45)
 		{
+			isMoves = true;
 			studentDirY = studentSpeed * 0.5;
-		} else {
-			isMoves = false;
 		}
 	}
 	// move right
 	else if (Key.isDown(Key.D))
 	{
-		isMoves = true;
-		// if student is not touching the side of table
-		// we move
 		if (student.position.y > -fieldHeight * 0.45)
 		{
+			isMoves = true;
 			studentDirY = -studentSpeed * 0.5;
-		} else {
-			isMoves = false;
 		}
 	}
 
@@ -148,27 +140,19 @@ function playerPaddleMovement()
 	// move up
 	if (Key.isDown(Key.W))
 	{
-		isMoves = true;
-		// if student is not touching the side of table
-		// we move
 		if (student.position.x < fieldWidth * 0.45)
 		{
+			isMoves = true;
 			studentDirX = studentSpeed * 0.5;
-		} else {
-			isMoves = false;
 		}
 	}
 	// move down
 	else if (Key.isDown(Key.S))
 	{
-		isMoves = true;
-		// if student is not touching the side of table
-		// we move
 		if (student.position.x > -fieldWidth * 0.45)
 		{
+			isMoves = true;
 			studentDirX = -studentSpeed * 0.5;
-		} else {
-			isMoves = false;
 		}
 	}
 

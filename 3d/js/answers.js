@@ -30,7 +30,11 @@ function createAnswer() {
 function answersMovement() {
 
     for (var i = 0; i < answers.length; i++) {
-        answers[i].position.z += 4;
+        if (answers[i].position.z > maxHeight) {
+            removeAnswer(i--);
+        } else {
+            answers[i].position.z += 4;
+        }
         //if (answers.z > 300) {
             ///answers[i]
         //}
@@ -40,20 +44,57 @@ function answersMovement() {
 
 function answersPhysics() {
     var removedAnswerIndexes = [];
-    for (var i = 0; i < answers.length; i++) {
-        for (var j = 0; j < labs.length; j++) {
-            if (answers[i].position.x > labs[j].position.x - 50 && answers[i].position.x < labs[j].position.x + 50
-                && answers[i].position.y > labs[j].position.y - 50 && answers[i].position.y < labs[j].position.y + 50
-                && answers[i].position.z >= labs[j].position.z
-            ) {
-                labs[j].material.color.setHex(0xff0000);
-                removedAnswerIndexes.push(i);
-                removeLab(j);
+    
+    for (var j = 0; j < labs.length; j++) {
+        var labText = labs[j].text;
+        for (var i = 0; i < answers.length; i++) {
+            if (answers[i].position.z >= labs[j].position.z 
+                && answers[i].position.x > labs[j].position.x - 40 && answers[i].position.x < labs[j].position.x + 40) {
+                var clash = false,
+                    textToReplace = "";
+
+                if (labText.includes("L") && answers[i].position.y < labs[j].position.y + 20 && answers[i].position.y > labs[j].position.y - 20) {
+                    clash = true;
+                    textToReplace = "L";
+                } else if (labText.includes("A") && answers[i].position.y < labs[j].position.y && answers[i].position.y > labs[j].position.y - 20) {
+                    clash = true;
+                    textToReplace = "A";
+                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 20 && answers[i].position.y > labs[j].position.y - 40) {
+                    clash = true;
+                    textToReplace = "B";
+                }
+
+                if (clash) {
+                    var positions = {
+                        x : labs[j].position.x,
+                        y : labs[j].position.y,
+                        z : labs[j].position.z
+                    };
+
+                    var newText = labText.replace(textToReplace, "  ");
+
+                    // removedAnswerIndexes.push(i);
+                    scene.remove(answers[i]);
+                    answers.splice(i--,1);
+
+                    removeLab(j--);
+
+                    if (newText.trim() !== "") {
+                        createLab(positions, newText);
+                    }
+                }
+
+
             }
         }
     }
 
-    removeAnswers(removedAnswerIndexes)
+    // removeAnswers(removedAnswerIndexes)
+}
+
+function removeAnswer(index) {
+    scene.remove(answers[index]);
+    answers.splice(index,1);
 }
 
 function removeAnswers(indexArray) {

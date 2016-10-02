@@ -2,11 +2,10 @@ var labs = [];
 var labsFallingBorderX = fieldWidth * 0.8;
 var labsFallingBorderY = fieldHeight * 0.8;
 
-function createLab() {
-
+function createLab(position, text = "LAB") {
     var loader = new THREE.FontLoader();
     loader.load('fonts/labfont.js', function (font) {
-        var textGeo = new THREE.TextGeometry("LAB", {
+        var textGeo = new THREE.TextGeometry(text, {
 
             font: font,
             size: 30,
@@ -22,17 +21,21 @@ function createLab() {
         var textMaterial = new THREE.MeshPhongMaterial({color: 0xffffff});
 
         var mesh = new THREE.Mesh(textGeo, textMaterial);
-        var x = (Math.random() - 0.5) * labsFallingBorderX;
-        var y = (Math.random() - 0.4) * labsFallingBorderY;
+        
+        position = position || {
+            x : (Math.random() - 0.5) * labsFallingBorderX,
+            y : (Math.random() - 0.4) * labsFallingBorderY,
+            z : maxHeight
+        };
 
-        mesh.position.set(x, y, 300);
+        mesh.position.set(position.x, position.y, position.z);
 
         mesh.rotation.x = 180 * Math.PI / 180;
         mesh.rotation.y = -90 * Math.PI / 180;
         mesh.rotation.z = 90 * Math.PI / 180;
 
         mesh.castShadow = true;
-
+        mesh.text = text;
         scene.add(mesh);
         labs.push(mesh);
     });
@@ -40,9 +43,9 @@ function createLab() {
 
 function labsMovement() {
     for (var i = 0; i < labs.length; i++) {
-        labs[i].position.z--;
-        labs[i].rotation.y += 2 * Math.PI / 180;
-        labs[i].rotation.x += 2 * Math.PI / 180;
+        labs[i].position.z -= .5;
+        // labs[i].rotation.y += 2 * Math.PI / 180;
+        // labs[i].rotation.x += 2 * Math.PI / 180;
     }
 
     if (labs.length && labs[0].position.z < -10) {
@@ -65,7 +68,7 @@ function initLabs() {
 
     var generateLab = function () {
         createLab();
-        setTimeout(generateLab, 2000);
+        setTimeout(generateLab, 4000);
     };
     generateLab();
 }
