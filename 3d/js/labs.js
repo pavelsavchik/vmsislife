@@ -9,12 +9,12 @@ function createLab(position, text = "LAB") {
 
             font: font,
             size: 30,
-            height: 7,
+            height: 5,
             curveSegments: 12,
 
-            bevelThickness: 2,
-            bevelSize: 2,
-            bevelEnabled: false
+            bevelThickness: 5,
+            bevelSize: 1,
+            bevelEnabled: true
 
         });
 

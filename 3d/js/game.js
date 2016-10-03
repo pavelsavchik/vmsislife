@@ -6,7 +6,7 @@
 var renderer, scene, camera, pointLight;
 
 // field variables
-var fieldWidth = 300, fieldHeight = 300;
+var fieldWidth = 300, fieldHeight = 500;
 var sceneWidth, sceneHeight, maxHeight = 300; 
 
 // student variables
@@ -25,6 +25,7 @@ function setup()
 {
 	score = 0;
 	createScene();
+	createLight();
 	createCamera();
 	createSurface();
 	createStudent();
@@ -36,7 +37,7 @@ function setup()
 function createScene()
 {
 	// scene size
-	sceneWidth = 640, sceneHeight = 500;
+	sceneWidth = 840, sceneHeight = 500;
 
 	renderer = new THREE.WebGLRenderer();
 	scene = new THREE.Scene();
@@ -44,28 +45,30 @@ function createScene()
 
 	var c = document.getElementById("gameCanvas");
 	c.appendChild(renderer.domElement);
+}
 
-	// // create a point light
+function createLight() {
 	pointLight = new THREE.PointLight(0xF8D898);
 
-	// set its position
 	pointLight.position.x = -1000;
 	pointLight.position.y = 0;
 	pointLight.position.z = 1000;
 	pointLight.intensity = 2.9;
 	pointLight.distance = 10000;
-	// add to the scene
+
 	scene.add(pointLight);
 
-
-
-	spotLight = new THREE.SpotLight(0xF8D898);
+	spotLight = new THREE.SpotLight(0xFF0000);
 	spotLight.position.set(0, 0, 460);
 	spotLight.intensity = 1.5;
 	spotLight.castShadow = true;
+	spotLight.shadowMapWidth = 1024;
+	spotLight.shadowMapHeight = 1024;
+	
 	scene.add(spotLight);
 
 	renderer.shadowMapEnabled = true;
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;
 }
 
 function draw()

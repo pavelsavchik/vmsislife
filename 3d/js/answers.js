@@ -1,7 +1,7 @@
 // lower 'segment' and 'ring' values will increase performance
 var radius = 5,
-    segments = 6,
-    rings = 6;
+    segments = 12,
+    rings = 12;
 
 var sphereGeometry = new THREE.SphereGeometry(
     radius,
@@ -22,6 +22,9 @@ function createAnswer() {
     answer.position.x = student.position.x;
     answer.position.y = student.position.y;
     answer.position.z = 20;
+
+    answer.castShadow = true;
+
     scene.add(answer);
 
     answers.push(answer)

@@ -3,7 +3,7 @@ var explosionSettings = {
 	parts : 5,
 	objectCount : 100,
 	speed : 20,
-	size : 2,
+	size : 3,
 	colors : [ 0x0000FF, 0x00FF00, 0xFF0000, 0x00FFFF, 0xFFFFFF, ],
 	lifeTime : 10
 };
