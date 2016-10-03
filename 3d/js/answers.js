@@ -49,19 +49,19 @@ function answersPhysics() {
         var labText = labs[j].text;
         for (var i = 0; i < answers.length; i++) {
             if (answers[i].position.z >= labs[j].position.z 
-                && answers[i].position.x > labs[j].position.x - 40 && answers[i].position.x < labs[j].position.x + 40) {
+                && answers[i].position.x > labs[j].position.x - 30 && answers[i].position.x < labs[j].position.x + 30) {
                 var clash = false,
                     textToReplace = "",
                     dY = 0;
 
-                if (labText.includes("L") && answers[i].position.y < labs[j].position.y && answers[i].position.y > labs[j].position.y - 20) {
+                if (labText.includes("L") && answers[i].position.y < labs[j].position.y && answers[i].position.y > labs[j].position.y - 30) {
                     clash = true;
                     textToReplace = "L";
                 } else if (labText.includes("A") && answers[i].position.y < labs[j].position.y - 20 && answers[i].position.y > labs[j].position.y - 50) {
                     clash = true;
                     textToReplace = "A";
                     dY = -30;
-                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 50 && answers[i].position.y > labs[j].position.y - 70) {
+                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 50 && answers[i].position.y > labs[j].position.y - 90) {
                     clash = true;
                     textToReplace = "B";
                     dY = -50;

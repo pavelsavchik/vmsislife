@@ -62,8 +62,8 @@ function createLight() {
 	spotLight.position.set(0, 0, 460);
 	spotLight.intensity = 1.5;
 	spotLight.castShadow = true;
-	spotLight.shadowMapWidth = 1024;
-	spotLight.shadowMapHeight = 1024;
+	// spotLight.shadowMapWidth = 1024;
+	// spotLight.shadowMapHeight = 1024;
 	
 	scene.add(spotLight);
 
