@@ -1,10 +1,10 @@
 var explosions = [];
 var explosionSettings = {
-	parts : 5,
-	objectCount : 100,
+	parts : 10,
+	objectCount : 50,
 	speed : 20,
 	size : 3,
-	colors : [ 0x0000FF, 0x00FF00, 0xFF0000, 0x00FFFF, 0xFFFFFF, ],
+	colors : [ 0x0000FF, 0x00FF00, 0xFF0000, 0x00FFFF, 0xFFFFFF, 0xC72705, 0x0624E1, 0x7A8AEF, 0x00FA50, 0x01C941, 0xF79600, 0xFF00C5, 0x00F3FF, 0x5500FF],
 	lifeTime : 10
 };
 

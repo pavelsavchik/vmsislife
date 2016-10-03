@@ -60,7 +60,7 @@ function createLight() {
 
 	spotLight = new THREE.SpotLight(0xFF0000);
 	spotLight.position.set(0, 0, 460);
-	spotLight.intensity = 1.5;
+	spotLight.intensity = .1;
 	spotLight.castShadow = true;
 	// spotLight.shadowMapWidth = 1024;
 	// spotLight.shadowMapHeight = 1024;
