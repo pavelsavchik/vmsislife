@@ -1,35 +1,37 @@
 var explosions = [];
 var explosionSettings = {
-	objectCount : 500,
+	parts : 5,
+	objectCount : 100,
 	speed : 20,
 	size : 2,
-	color : 0xFF0000,
+	colors : [ 0x0000FF, 0x00FF00, 0xFF0000, 0x00FFFF, 0xFFFFFF, ],
 	lifeTime : 10
 };
 
 function createExplosion(position) {
-	
-	var geometry = new THREE.Geometry();
-  
-	for (i = 0; i < explosionSettings.objectCount; i ++) { 
-	    var vertex = new THREE.Vector3();
-	    vertex.x = position.x;
-	    vertex.y = position.y;
-	    vertex.z = position.z;
-	  
-	    geometry.vertices.push(vertex);
+	for (var j = 0; j < explosionSettings.parts; j++) {
+		var geometry = new THREE.Geometry();
+		
+		for (i = 0; i < explosionSettings.objectCount; i ++) { 
+		    var vertex = new THREE.Vector3();
+		    vertex.x = position.x;
+		    vertex.y = position.y;
+		    vertex.z = position.z;
+		  
+		    geometry.vertices.push(vertex);
+		}
+
+		var material = new THREE.PointsMaterial({
+			size : explosionSettings.size,
+			color : generateColor()
+		});
+		
+		var explosion = new THREE.Points(geometry, material);
+		explosion.lifeTime = explosionSettings.lifeTime;
+
+	    explosions.push(explosion)
+	    scene.add(explosion);
 	}
-
-	var material = new THREE.ParticleBasicMaterial({
-		size : explosionSettings.size,
-		color : explosionSettings.color
-	});
-	
-	var explosion = new THREE.ParticleSystem(geometry, material);
-	explosion.lifeTime = explosionSettings.lifeTime;
-
-    explosions.push(explosion)
-    scene.add(explosion);
 }
 
 
@@ -53,4 +55,8 @@ function explosionsPhysics() {
 
 function removeExplosion(index) {
     scene.remove(explosions.splice(index,1)[0]);
+}
+
+function generateColor() {
+	return explosionSettings.colors[Math.round(Math.random() * (explosionSettings.colors.length - 1))];
 }

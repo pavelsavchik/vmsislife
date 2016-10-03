@@ -54,11 +54,11 @@ function answersPhysics() {
                 if (labText.includes("L") && answers[i].position.y < labs[j].position.y && answers[i].position.y > labs[j].position.y - 20) {
                     clash = true;
                     textToReplace = "L";
-                } else if (labText.includes("A") && answers[i].position.y < labs[j].position.y - 20 && answers[i].position.y > labs[j].position.y - 40) {
+                } else if (labText.includes("A") && answers[i].position.y < labs[j].position.y - 20 && answers[i].position.y > labs[j].position.y - 50) {
                     clash = true;
                     textToReplace = "A";
                     dY = -30;
-                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 40 && answers[i].position.y > labs[j].position.y - 70) {
+                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 50 && answers[i].position.y > labs[j].position.y - 70) {
                     clash = true;
                     textToReplace = "B";
                     dY = -50;
