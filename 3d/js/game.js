@@ -173,8 +173,8 @@ function playerPaddleMovement()
 	}
 
 
-	student.scale.y += (1 - student.scale.y) * 0.2;
-	student.scale.z += (1 - student.scale.z) * 0.2;
+	//student.scale.y += (1 - student.scale.y) * 0.2;
+	//student.scale.z += (1 - student.scale.z) * 0.2;
 
 	student.position.y += studentDirY;
 	student.position.x += studentDirX;

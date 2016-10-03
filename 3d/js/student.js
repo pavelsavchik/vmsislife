@@ -8,34 +8,22 @@ var studentMaterial =
 
 var studentWidth = 20,
 	studentHeight = 20, 
-	studentDepth = 30, 
+	studentDepth = -10,
 	studentQuality = 1;
 
 function createStudent() {
 
-	student = new THREE.Mesh(
+	var loader = new THREE.ObjectLoader();
+	loader.load("models/student.json",function ( obj ) {
 
-		new THREE.CubeGeometry(
-			studentWidth,
-			studentHeight,
-			studentDepth,
-			studentQuality,
-			studentQuality,
-			studentQuality),
+		student = obj;
+		student.position.x = -fieldWidth/2 + studentWidth;
 
-		studentMaterial);
+		// lift students over playing surface
+		student.position.z = studentDepth;
+		student.scale.set(10,10,10);
 
-	// set students on each side of the table
-	student.position.x = -fieldWidth/2 + studentWidth;
-
-	// lift students over playing surface
-	student.position.z = studentDepth;
-
-
-	//student.receiveShadow = true;
-	//student.castShadow = true;
-
-	// // add the sphere to the scene
-	scene.add(student);
-
+		student.rotation.x = 90 * Math.PI / 180;
+		scene.add(student);
+	});
 }
