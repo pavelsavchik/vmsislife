@@ -74,6 +74,7 @@ function draw()
 	requestAnimationFrame(draw);
     //
 	// cameraPhysics();
+	explosionsPhysics();
 	answersPhysics()
 	labsMovement();
 	answersMovement();
