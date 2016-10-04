@@ -72,18 +72,20 @@ function initLabs() {
     THREE.Cache.enabled = true;
 
     var generateLab = function () {
-        createLab();
-        setTimeout(generateLab, 4000);
+        if (!isWasted) {
+            createLab();
+            setTimeout(generateLab, 4000);   
+        }
     };
-    generateLab();
+    setTimeout(generateLab, 4000);
 }
 
 function passLab() {
     passedLabs++;
-    document.getElementById("passedLabs").innerHTML = passedLabs;
+    passedLabsLabel.innerHTML = passedLabs;
 }
 
 function failLab() {
     failedLabs++;
-    document.getElementById("failedLabs").innerHTML = failedLabs;
+    failedLabsLabel.innerHTML = failedLabs;
 }

@@ -10,6 +10,10 @@ var resourcesToLoad = [{
 		name : "surfaceTexture",
 		path : "textures/surface_3.jpg",
 		loader : THREE.TextureLoader
+	}, {
+		name : "bloodyFont",
+		path : "fonts/bloodyFont.json",
+		loader : THREE.FontLoader
 	}
 ];
 

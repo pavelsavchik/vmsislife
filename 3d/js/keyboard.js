@@ -94,7 +94,7 @@ function playerPaddleMovement()
     }
 
 
-    if (Key.isUp(Key.SPACE))
+    if (Key.isUp(Key.SPACE) && !isWasted)
     {
         createAnswer()
     }

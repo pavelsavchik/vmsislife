@@ -1,32 +1,5 @@
 var events = [],
-	eventTypes = {
-		SUCCESS : {
-			color : 0x00FF00,
-			message : "passed",
-			fontSize : 12
-		},
-		FAIL : {
-			color : 0xFF0000,
-			message : "wasted",
-			fontSize : 12
-		},
-		VEDOMA_CATCHED : {
-			color : 0x0624E1,
-			message : "catched",
-			fontSize : 12
-		},
-		SEM : {
-			color : 0x781311,
-			message : "sem ",
-			fontSize : 24
-		},
-		OTCHISLEN : {
-			color : 0xFF0000,
-			message : "gone",
-			fontSize : 24
-		}
-	},
-	eventLifeTime = 30
+	eventTypes;
 
 function createEvent(position, eventType, additionalMessage = "") {
 	
@@ -34,7 +7,7 @@ function createEvent(position, eventType, additionalMessage = "") {
 
 	var textGeo = new THREE.TextGeometry(eventType.message + additionalMessage, {
 
-        font: resources.defaultFont,
+        font: eventType.font,
         size: eventType.fontSize,
         height: 3,
         curveSegments: 12,
@@ -55,18 +28,80 @@ function createEvent(position, eventType, additionalMessage = "") {
 
     event.castShadow = true;
 
-    event.lifeTime = 0;
+    event.lifeTime = eventType.lifeTime;
+    event.moveDirection = eventType.direction;
+    event.speed = eventType.speed;
 
     scene.add(event);
     events.push(event);
 }
 
-function eventsMovement() {
-	for (var i = 0; i < events.length; i++) {
-		if (events[i].lifeTime++ > eventLifeTime) {
-			removeItem(events, i--);
-		} else {
-			events[i].position.z += 1;
+function initEvents() {
+	eventTypes = {
+		SUCCESS : {
+			color : 0x00FF00,
+			message : "passed",
+			fontSize : 12,
+			font : resources.defaultFont,
+			direction : "z",
+			speed : 1,
+			lifeTime : 30
+		},
+		FAIL : {
+			color : 0xFF0000,
+			message : "failed",
+			fontSize : 12,
+			font : resources.defaultFont,
+			direction : "z",
+			speed : 1,
+			lifeTime : 30
+		},
+		VEDOMA_CATCHED : {
+			color : 0x0624E1,
+			message : "catched",
+			fontSize : 12,
+			font : resources.defaultFont,
+			direction : "z",
+			speed : 1,
+			lifeTime : 30
+		},
+		SEM : {
+			color : 0x781311,
+			message : "sem ",
+			fontSize : 40,
+			font : resources.bloodyFont,
+			direction : "x",
+			speed : -10,
+			lifeTime : 100
+		},
+		WASTED : {
+			color : 0xFF0000,
+			message : "otchislen",
+			fontSize : 40,
+			font : resources.bloodyFont,
+			direction : "x",
+			speed : -10,
+			lifeTime : 50
 		}
 	}
+}
+
+function eventsMovement() {
+	for (var i = 0; i < events.length; i++) {
+		var event = events[i];
+		if (event.lifeTime < 0) {
+			if (!isWasted) {
+				removeItem(events, i--);
+			}
+		} else {
+			event.lifeTime--;
+			event.position[event.moveDirection] += event.speed;
+		}
+	}
+}
+
+function removeEvents() {
+	for(var i = events.length - 1; i >= 0; i--){
+        removeItem(events, i);
+    }
 }

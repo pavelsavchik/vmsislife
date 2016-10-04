@@ -19,12 +19,19 @@ var defaultFont;
 
 var currentSem = 1;
 
+var passedLabsLabel, failedLabsLabel;
+
+var isWasted = false;	
+
 // ------------------------------------- //
 // ------- GAME FUNCTIONS -------------- //
 // ------------------------------------- //
 
 function setup()
 {
+	passedLabsLabel = document.getElementById("passedLabs");
+	failedLabsLabel = document.getElementById("failedLabs");
+
 	loadResources(function() {
 		createScene();
 		createLight();
@@ -32,6 +39,7 @@ function setup()
 		createSurface();
 		createStudent();
 		initLabs();
+		initEvents();
 		draw();
 		nextSem();
 	});
@@ -41,22 +49,24 @@ function nextSem() {
 
 	if (failedLabs > 0) {
 		removeLabs();
+		removeEvents();
 		removeVedoms();
+		removeAnswers();
 
 		createEvent({
-			x : 0,
-			y : 0,
-			z : 100
-		}, "OTCHISLEN");
-		
+			x : 500,
+			y : 120,
+			z : 150
+		}, "WASTED");
+		isWasted = true
 	} else {
 		labSpeed += 0.5;
 			createEvent({
-			x : 0,
-			y : 0,
-			z : 100
+			x : 500,
+			y : 80,
+			z : 150
 		}, "SEM", currentSem++);
-		setTimeout(nextSem, 10000);
+		setTimeout(nextSem, 20000);
 	}
 }
 

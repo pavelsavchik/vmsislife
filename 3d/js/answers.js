@@ -21,7 +21,7 @@ function createAnswer() {
 
     answer.position.x = student.position.x;
     answer.position.y = student.position.y;
-    answer.position.z = 20;
+    answer.position.z = 60;
 
     answer.castShadow = true;
 
@@ -96,5 +96,15 @@ function answersPhysics() {
                 }
             }
         }
+    }
+}
+
+function removeAnswer(index) {
+    removeItem(answers, index);
+}
+
+function removeAnswers() {
+    for(var i = answers.length - 1; i >= 0; i--){
+        removeAnswer(i);
     }
 }
