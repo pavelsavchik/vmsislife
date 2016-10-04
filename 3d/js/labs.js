@@ -50,6 +50,7 @@ function labsMovement() {
 
     if (labs.length && labs[0].position.z < -10) {
         //remove first lab from scene
+        failLab();
         scene.remove(labs[0]);
 
         //remove first lab from array
@@ -71,4 +72,14 @@ function initLabs() {
         setTimeout(generateLab, 4000);
     };
     generateLab();
+}
+
+function passLab() {
+    passedLabs++;
+    document.getElementById("passedLabs").innerHTML = passedLabs;
+}
+
+function failLab() {
+    failedLabs++;
+    document.getElementById("failedLabs").innerHTML = failedLabs;
 }

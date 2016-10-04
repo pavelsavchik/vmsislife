@@ -13,7 +13,8 @@ var sceneWidth, sceneHeight, maxHeight = 300;
 var studentDirX = 0, studentDirY = 0, studentSpeed = 5;
 
 // game-related variables
-var score = 0;
+var passedLabs = 0;
+var failedLabs = 0;
 // you can change this to any positive whole number
 var maxScore = 20;
 
@@ -23,7 +24,6 @@ var maxScore = 20;
 
 function setup()
 {
-	score = 0;
 	createScene();
 	createLight();
 	createCamera();
@@ -82,6 +82,7 @@ function draw()
 	labsMovement();
 	answersMovement();
 	playerPaddleMovement();
+	// vedomsPhysics();
 }
 
 function createCamera()

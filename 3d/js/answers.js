@@ -75,6 +75,8 @@ function answersPhysics() {
                             y : labs[j].position.y,
                             z : labs[j].position.z
                         }, newText);
+                    } else {
+                        passLab();
                     }
 
                     createExplosion({
