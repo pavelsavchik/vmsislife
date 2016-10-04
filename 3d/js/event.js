@@ -20,7 +20,7 @@ var events = [],
 			message : "sem ",
 			fontSize : 24
 		},
-		GONE : {
+		OTCHISLEN : {
 			color : 0xFF0000,
 			message : "gone",
 			fontSize : 24
