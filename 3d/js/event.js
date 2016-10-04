@@ -9,6 +9,11 @@ var events = [],
 			color : 0xFF0000,
 			message : "wasted",
 			fontSize : 12
+		},
+		VEDOMA_CATCHED : {
+			color : 0x0624E1,
+			message : "catched",
+			fontSize : 12
 		}
 	},
 	eventLifeTime = 30

@@ -41,20 +41,18 @@ function createLab(position, text = "LAB") {
 function labsMovement() {
     for (var i = 0; i < labs.length; i++) {
         labs[i].position.z -= .5;
-        // labs[i].rotation.y += 2 * Math.PI / 180;
-        // labs[i].rotation.x += 2 * Math.PI / 180;
-    }
+        
+        if (labs[i].position.z < 0) {
+            //remove first lab from scene
+            failLab();
 
-    if (labs.length && labs[0].position.z < 0) {
-        //remove first lab from scene
-        failLab();
+            createEvent(labs[i].position, "FAIL");
 
-        createEvent(labs[0].position, "FAIL");
+            scene.remove(labs[i]);
 
-        scene.remove(labs[0]);
-
-        //remove first lab from array
-        labs.splice(0, 1);
+            //remove first lab from array
+            labs.splice(i--, 1);
+        }
     }
 }
 

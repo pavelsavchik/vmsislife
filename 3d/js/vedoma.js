@@ -1,23 +1,11 @@
-// lower 'segment' and 'ring' values will increase performance
-// var radius = 5,
-//     segments = 12,
-//     rings = 12;
-
-// var sphereGeometry = new THREE.SphereGeometry(
-//     radius,
-//     segments,
-//     rings);
-
-//TODO: Vedomas catching
 //TODO: LEVELS (increase speed, fixed time for each level)
 //TODO: Labels (vedoma catched, OTCHISLEN, labs failed)
+//TODO: find better model for vedoma
 
-var vedoms = [];
+var vedoms = [],
+    vedomaSize = 50;
 
 function createVedoma() {
-
-
-    //TODO: Maybe replace by cube geometry?
     var loader = new THREE.ObjectLoader();
     loader.load("models/vedoma.json",function ( obj ) {
 
@@ -28,13 +16,11 @@ function createVedoma() {
         obj.castShadow = true;
 
 
-        obj.scale.set(100,100,100);
+        obj.scale.set(vedomaSize,vedomaSize,vedomaSize);
         scene.add(obj);
 
         vedoms.push(obj);
     });
-
-
 }
 
 function vedomsPhysics() {
@@ -42,16 +28,21 @@ function vedomsPhysics() {
         createVedoma();
     }
 
-    for(var i = 0; i < vedoms.lenght; i++) {
-        //IF POS CATCH VEDOMA
+    for(var i = 0; i < vedoms.length; i++) {
+        var vedoma = vedoms[i];
+        if (vedoma.position.x > student.position.x - vedomaSize / 2 && vedoma.position.x < student.position.x + vedomaSize / 2 &&
+            vedoma.position.y > student.position.y - vedomaSize / 2 && vedoma.position.y < student.position.y + vedomaSize / 2) {
+
+            removeItem(vedoms, i--);
+            vedomaCatched();
+            createEvent(vedoma.position, "VEDOMA_CATCHED");
+
+        }
     }
-
-
 }
 
-function catchVedoma() {
-    //ADD TEXT 'VEDOMA CATCHED'
+function vedomaCatched() {
+    failedLabs--;
+    document.getElementById("failedLabs").innerHTML = failedLabs;
+    passLab();
 }
-
-
-

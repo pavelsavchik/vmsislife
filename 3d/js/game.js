@@ -92,7 +92,7 @@ function draw()
 	answersMovement();
 	eventsMovement();
 	playerPaddleMovement();
-	// vedomsPhysics();
+	vedomsPhysics();
 }
 
 function createCamera()
