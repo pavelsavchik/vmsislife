@@ -7,6 +7,10 @@ var resourcesToLoad = [{
 		path : 'models/student.json',
 		loader : THREE.ObjectLoader
 	}, {
+		name : "studentMilitaryModel",
+		path : 'models/student_military.json',
+		loader : THREE.ObjectLoader
+	}, {
 		name : "surfaceTexture",
 		path : "textures/surface_3.jpg",
 		loader : THREE.TextureLoader

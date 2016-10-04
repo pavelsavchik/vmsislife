@@ -22,3 +22,13 @@ function createStudent() {
 	student.rotation.x = 90 * Math.PI / 180;
 	scene.add(student);
 }
+
+function convertStudentToMilitary() {
+	var militaryStudent = resources.studentMilitaryModel;
+	militaryStudent.position.set(student.position.x, student.position.y, student.position.z);
+	militaryStudent.scale.set(10, 10, 10);
+	militaryStudent.rotation.set(student.rotation.x, student.rotation.y, student.rotation.z);
+	scene.remove(student);
+	scene.add(militaryStudent);
+	student = militaryStudent;
+}
