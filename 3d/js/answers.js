@@ -77,6 +77,12 @@ function answersPhysics() {
                         }, newText);
                     } else {
                         passLab();
+
+                        createEvent({
+                            x : labs[j].position.x,
+                            y : labs[j].position.y,
+                            z : labs[j].position.z
+                        }, "SUCCESS");
                     }
 
                     createExplosion({

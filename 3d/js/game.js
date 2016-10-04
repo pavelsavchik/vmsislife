@@ -7,7 +7,7 @@ var renderer, scene, camera, pointLight;
 
 // field variables
 var fieldWidth = 300, fieldHeight = 500;
-var sceneWidth, sceneHeight, maxHeight = 300; 
+var sceneWidth, sceneHeight, maxHeight = 300;
 
 // student variables
 var studentDirX = 0, studentDirY = 0, studentSpeed = 5;
@@ -18,19 +18,28 @@ var failedLabs = 0;
 // you can change this to any positive whole number
 var maxScore = 20;
 
+var defaultFont;
+
 // ------------------------------------- //
 // ------- GAME FUNCTIONS -------------- //
 // ------------------------------------- //
 
 function setup()
 {
-	createScene();
-	createLight();
-	createCamera();
-	createSurface();
-	createStudent();
-	initLabs();
-	draw();
+
+	var loader = new THREE.FontLoader();
+	loader.load('fonts/labfont.js', function(font) {
+
+		defaultFont = font;
+
+		createScene();
+		createLight();
+		createCamera();
+		createSurface();
+		createStudent();
+		initLabs();
+		draw();
+	});
 }
 
 
@@ -81,6 +90,7 @@ function draw()
 	answersPhysics()
 	labsMovement();
 	answersMovement();
+	eventsMovement();
 	playerPaddleMovement();
 	// vedomsPhysics();
 }
@@ -181,3 +191,7 @@ function playerPaddleMovement()
 	student.position.x += studentDirX;
 }
 
+function removeItem(from, index) {
+	scene.remove(from[index]);
+    from.splice(index, 1);
+}

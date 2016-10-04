@@ -25,25 +25,22 @@ function createSurface() {
 	scene.add(surface);
 	surface.receiveShadow = true;
 
-	var loader = new THREE.FontLoader();
-    loader.load('fonts/labfont.js', function (font) {
-		var textGeo = new THREE.TextGeometry("DEADLINE", {
-	        font: font,
-	        size: 53,
-	        height: 1,
-	        curveSegments: 12,
-	    });
+	var textGeo = new THREE.TextGeometry("DEADLINE", {
+        font: defaultFont,
+        size: 53,
+        height: 1,
+        curveSegments: 12,
+    });
 
-	    var textMaterial = new THREE.MeshPhongMaterial({color: 0xffffff});
-		var deadline = new THREE.Mesh(textGeo, textMaterial);
-	        
-	    deadline.position.set(0, surfaceWidth * 0.6, 0);
+    var textMaterial = new THREE.MeshPhongMaterial({color: 0x000000});
+	var deadline = new THREE.Mesh(textGeo, textMaterial);
+        
+    deadline.position.set(0, surfaceWidth * 0.6, 0);
 
-	    deadline.rotation.x = 180 * Math.PI / 180;
-	    deadline.rotation.y = 180 * Math.PI / 180;
-	    deadline.rotation.z = 90 * Math.PI / 180;
+    deadline.rotation.x = 180 * Math.PI / 180;
+    deadline.rotation.y = 180 * Math.PI / 180;
+    deadline.rotation.z = 90 * Math.PI / 180;
 
-	    deadline.receiveShadow = true;
-	    scene.add(deadline);
-	});
+    deadline.receiveShadow = true;
+    scene.add(deadline);
 }
