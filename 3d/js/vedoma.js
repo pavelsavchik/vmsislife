@@ -24,7 +24,7 @@ function createVedoma() {
 }
 
 function vedomsPhysics() {
-    if(failedLabs && Math.random() < 0.003) {
+    if(vedoms.length < failedLabs && Math.random() < 0.003) {
         createVedoma();
     }
 

@@ -14,15 +14,25 @@ var events = [],
 			color : 0x0624E1,
 			message : "catched",
 			fontSize : 12
+		},
+		SEM : {
+			color : 0x781311,
+			message : "sem ",
+			fontSize : 24
+		},
+		GONE : {
+			color : 0xFF0000,
+			message : "gone",
+			fontSize : 24
 		}
 	},
 	eventLifeTime = 30
 
-function createEvent(position, eventType) {
+function createEvent(position, eventType, additionalMessage = "") {
 	
 	var eventType = eventTypes[eventType];
 
-	var textGeo = new THREE.TextGeometry(eventType.message, {
+	var textGeo = new THREE.TextGeometry(eventType.message + additionalMessage, {
 
         font: defaultFont,
         size: eventType.fontSize,

@@ -20,14 +20,16 @@ var maxScore = 20;
 
 var defaultFont;
 
+var currentSem = 1;
+
 // ------------------------------------- //
 // ------- GAME FUNCTIONS -------------- //
 // ------------------------------------- //
 
 function setup()
 {
-
 	var loader = new THREE.FontLoader();
+	//TODO : load all resources
 	loader.load('fonts/labfont.js', function(font) {
 
 		defaultFont = font;
@@ -39,7 +41,31 @@ function setup()
 		createStudent();
 		initLabs();
 		draw();
+		// nextSem();
 	});
+}
+
+function nextSem() {
+
+	if (failedLabs > 0) {
+		labs.splice(0, labs.length);
+		vedoms.splice(0, vedoms.length);
+
+		createEvent({
+			x : 0,
+			y : 0,
+			z : 100
+		}, "GONE");
+		
+	} else {
+		labSpeed += 0.5;
+			createEvent({
+			x : 0,
+			y : 0,
+			z : 100
+		}, "SEM", currentSem++);
+		setTimeout(nextSem, 10000);
+	}
 }
 
 
@@ -82,10 +108,6 @@ function createLight() {
 
 function draw()
 {
-	renderer.render(scene, camera);
-	requestAnimationFrame(draw);
-    //
-	// cameraPhysics();
 	explosionsPhysics();
 	answersPhysics()
 	labsMovement();
@@ -93,6 +115,9 @@ function draw()
 	eventsMovement();
 	playerPaddleMovement();
 	vedomsPhysics();
+
+	renderer.render(scene, camera);
+	requestAnimationFrame(draw);
 }
 
 function createCamera()
@@ -186,9 +211,10 @@ function playerPaddleMovement()
 
 	//student.scale.y += (1 - student.scale.y) * 0.2;
 	//student.scale.z += (1 - student.scale.z) * 0.2;
-
-	student.position.y += studentDirY;
-	student.position.x += studentDirX;
+	if (student) {
+		student.position.y += studentDirY;
+		student.position.x += studentDirX;	
+	}	
 }
 
 function removeItem(from, index) {

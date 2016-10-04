@@ -1,6 +1,9 @@
 var labs = [];
 var labsFallingBorderX = fieldWidth * 0.8;
 var labsFallingBorderY = fieldHeight * 0.8;
+// var labSettings = {
+    var labSpeed = 0.5
+// };
 
 function createLab(position, text = "LAB") {
     var textGeo = new THREE.TextGeometry(text, {
@@ -40,7 +43,7 @@ function createLab(position, text = "LAB") {
 
 function labsMovement() {
     for (var i = 0; i < labs.length; i++) {
-        labs[i].position.z -= .5;
+        labs[i].position.z -= labSpeed;
         
         if (labs[i].position.z < 0) {
             //remove first lab from scene

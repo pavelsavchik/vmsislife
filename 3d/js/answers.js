@@ -34,7 +34,7 @@ function answersMovement() {
 
     for (var i = 0; i < answers.length; i++) {
         if (answers[i].position.z > maxHeight) {
-            removeAnswer(i--);
+            removeItem(answers, i--);
         } else {
             answers[i].position.z += 4;
         }
@@ -48,7 +48,7 @@ function answersPhysics() {
     for (var j = 0; j < labs.length; j++) {
         var labText = labs[j].text;
         for (var i = 0; i < answers.length; i++) {
-            if (answers[i].position.z >= labs[j].position.z 
+            if (answers[i] && labs[j] && answers[i].position.z >= labs[j].position.z 
                 && answers[i].position.x > labs[j].position.x - 30 && answers[i].position.x < labs[j].position.x + 30) {
                 var clash = false,
                     textToReplace = "",
@@ -91,17 +91,10 @@ function answersPhysics() {
                         z : labs[j].position.z + 15
                     });
 
-                    removeAnswer(i);
-                    removeLab(j--);
+                    removeItem(answers, i);
+                    removeItem(labs, j--);
                 }
-
-
             }
         }
     }
-}
-
-function removeAnswer(index) {
-    scene.remove(answers[index]);
-    answers.splice(index,1);
 }
