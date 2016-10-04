@@ -48,14 +48,14 @@ function setup()
 function nextSem() {
 
 	if (failedLabs > 0) {
-		labs.splice(0, labs.length);
-		vedoms.splice(0, vedoms.length);
+		removeLabs();
+		removeVedoms();
 
 		createEvent({
 			x : 0,
 			y : 0,
 			z : 100
-		}, "GONE");
+		}, "OTCHISLEN");
 		
 	} else {
 		labSpeed += 0.5;
@@ -93,17 +93,17 @@ function createLight() {
 
 	scene.add(pointLight);
 
-	spotLight = new THREE.SpotLight(0xFF0000);
-	spotLight.position.set(0, 0, 460);
-	spotLight.intensity = .1;
-	spotLight.castShadow = true;
+	//spotLight = new THREE.SpotLight(0xFF0000);
+	//spotLight.position.set(0, 0, 460);
+	//spotLight.intensity = .1;
+	//spotLight.castShadow = true;
 	// spotLight.shadowMapWidth = 1024;
 	// spotLight.shadowMapHeight = 1024;
 	
-	scene.add(spotLight);
+	//scene.add(spotLight);
 
-	renderer.shadowMapEnabled = true;
-	renderer.shadowMapType = THREE.PCFSoftShadowMap;
+	//renderer.shadowMapEnabled = true;
+	//renderer.shadowMapType = THREE.PCFSoftShadowMap;
 }
 
 function draw()

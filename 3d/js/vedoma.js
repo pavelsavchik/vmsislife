@@ -50,3 +50,15 @@ function vedomaCatched() {
         failedLabs--;
     document.getElementById("failedLabs").innerHTML = failedLabs;
 }
+
+
+function removeVedoma(index) {
+    scene.remove(vedoms[index]);
+    vedoms.splice(index, 1);
+}
+
+function removeVedoms() {
+    for(var i = vedoms.length - 1; i >= 0; i--){
+        removeVedoma(i)
+    }
+}

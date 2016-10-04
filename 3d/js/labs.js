@@ -64,6 +64,11 @@ function removeLab(index) {
     labs.splice(index, 1);
 }
 
+function removeLabs(index) {
+    for(var i = labs.length - 1; i >= 0; i--){
+        removeLab(i)
+    }
+}
 
 function initLabs() {
     THREE.Cache.enabled = true;
