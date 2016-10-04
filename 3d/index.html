@@ -1,53 +1,55 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Student's life</title>
-		<style>
-			body {
-				background-color: black;
-			}
-			#gameCanvas {
-				background-color: black;
-				width: 840px;
-				height: 500px;
-				margin: auto;
-				align: center;
-			}
-			#scoreboard {
-				text-align: center;
-				font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;
-				color: white;
-			}
-			#scores {
-				font-size:600%; 
-				padding:0; 
-				margin:0;
-				color: white;
-			}
-			#title {
-				background-color: white;
-				color: black;
-			}
-		</style>
-	</head>
-	<body onload='setup();'>
-		<div id='gameCanvas'></div>
-		<script src='./js/three.js'></script>
-		<script src='./js/keyboard.js'></script>
-		<script src='./js/student.js'></script>
-		<script src='./js/game.js'></script>
-		<script src='./js/surface.js'></script>
-		<script src='./js/labs.js'></script>
-		<script src='./js/answers.js'></script>
-		<script src='./js/explosion.js'></script>
-		<script src='./js/vedoma.js'></script>
-		<script src='./js/event.js'></script>
-		<!--<script src='./js/lab_font.js'></script>-->
-		<!--<script src='./js/text.js'></script>-->
-		<div id='scoreboard'>
-			<h1 id='title'>3D STUDENT'S LIFE</h1>
-		</div>
-		<h1 id='passedLabs' style="color:whitesmoke">0</h1>
-		<h1 id='failedLabs' style="color:darkred">0</h1>
-	</body>
+<head>
+    <title>Student's life</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        #gameCanvas {
+            background-color: black;
+            width: 840px;
+            height: 500px;
+            margin: auto;
+            align: center;
+        }
+    </style>
+</head>
+<body onload='setup();'>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 text-right" style="color:greenyellow; ">
+            <div style="font-size: 200%;">
+                <b>Passed:</b>
+            </div>
+            <div id="passedLabs" style="font-size: 1000%;">0</div>
+        </div>
+        <div class="col-lg-8">
+            <div id='gameCanvas'>
+
+            </div>
+            <script src='./js/three.js'></script>
+            <script src='./js/keyboard.js'></script>
+            <script src='./js/student.js'></script>
+            <script src='./js/game.js'></script>
+            <script src='./js/surface.js'></script>
+            <script src='./js/labs.js'></script>
+            <script src='./js/answers.js'></script>
+            <script src='./js/explosion.js'></script>
+            <script src='./js/vedoma.js'></script>
+            <script src='./js/event.js'></script>
+        </div>
+        <div class="col-lg-2 text-left" style="color:darkred; ">
+            <div style="font-size: 200%;">
+                <b>Failed:</b>
+            </div>
+            <div id="failedLabs" style="font-size: 1000%;">0</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
 </html>
