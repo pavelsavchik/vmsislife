@@ -8,9 +8,14 @@
 //     segments,
 //     rings);
 
+//TODO: Vedomas catching
+//TODO: LEVELS (increase speed, fixed time for each level)
+//TODO: Labels (vedoma catched, OTCHISLEN, labs failed)
+
 var vedoms = [];
 
 function createVedoma() {
+
 
     //TODO: Maybe replace by cube geometry?
     var loader = new THREE.ObjectLoader();
