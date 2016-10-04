@@ -16,12 +16,13 @@ var failedLabs = 0;
 var maxScore = 20;
 
 var defaultFont;
+var diplomRunned = true;
 
 var currentSem = 1;
 
 var passedLabsLabel, failedLabsLabel;
 
-var isWasted = false;	
+var isWasted = false;
 
 // ------------------------------------- //
 // ------- GAME FUNCTIONS -------------- //
@@ -40,6 +41,7 @@ function setup()
 		createStudent();
 		initLabs();
 		initEvents();
+		createDiplom();
 		draw();
 		nextSem();
 	});
@@ -110,13 +112,20 @@ function createLight() {
 
 function draw()
 {
-	explosionsPhysics();
-	answersPhysics()
-	labsMovement();
+
+	answersPhysics();
 	answersMovement();
-	eventsMovement();
 	playerPaddleMovement();
-	vedomsPhysics();
+	explosionsPhysics();
+
+	if(!diplomRunned) {
+		labsMovement();
+		eventsMovement();
+		vedomsPhysics();
+	} else {
+		diplomMovement();
+		diplomPhysics();
+	}
 
 	renderer.render(scene, camera);
 	requestAnimationFrame(draw);
