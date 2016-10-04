@@ -8,7 +8,7 @@ var labsFallingBorderY = fieldHeight * 0.8;
 function createLab(position, text = "LAB") {
     var textGeo = new THREE.TextGeometry(text, {
 
-        font: defaultFont,
+        font: resources.defaultFont,
         size: 30,
         height: 5,
         curveSegments: 12,

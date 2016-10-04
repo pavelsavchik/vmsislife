@@ -34,7 +34,7 @@ function createEvent(position, eventType, additionalMessage = "") {
 
 	var textGeo = new THREE.TextGeometry(eventType.message + additionalMessage, {
 
-        font: defaultFont,
+        font: resources.defaultFont,
         size: eventType.fontSize,
         height: 3,
         curveSegments: 12,

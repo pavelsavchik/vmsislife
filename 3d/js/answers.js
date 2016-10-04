@@ -1,7 +1,7 @@
 // lower 'segment' and 'ring' values will increase performance
 var radius = 5,
-    segments = 12,
-    rings = 12;
+    segments = 6,
+    rings = 6;
 
 var sphereGeometry = new THREE.SphereGeometry(
     radius,

@@ -28,12 +28,7 @@ var currentSem = 1;
 
 function setup()
 {
-	var loader = new THREE.FontLoader();
-	//TODO : load all resources
-	loader.load('fonts/labfont.js', function(font) {
-
-		defaultFont = font;
-
+	loadResources(function() {
 		createScene();
 		createLight();
 		createCamera();
