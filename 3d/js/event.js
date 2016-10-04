@@ -20,7 +20,7 @@ var events = [],
 			message : "sem ",
 			fontSize : 24
 		},
-		GONE : {
+		OTCHISLEN : {
 			color : 0xFF0000,
 			message : "gone",
 			fontSize : 24
@@ -34,7 +34,7 @@ function createEvent(position, eventType, additionalMessage = "") {
 
 	var textGeo = new THREE.TextGeometry(eventType.message + additionalMessage, {
 
-        font: defaultFont,
+        font: resources.defaultFont,
         size: eventType.fontSize,
         height: 3,
         curveSegments: 12,

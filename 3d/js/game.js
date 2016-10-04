@@ -9,9 +9,6 @@ var renderer, scene, camera, pointLight;
 var fieldWidth = 300, fieldHeight = 500;
 var sceneWidth, sceneHeight, maxHeight = 300;
 
-// student variables
-var studentDirX = 0, studentDirY = 0, studentSpeed = 5;
-
 // game-related variables
 var passedLabs = 0;
 var failedLabs = 0;
@@ -28,12 +25,7 @@ var currentSem = 1;
 
 function setup()
 {
-	var loader = new THREE.FontLoader();
-	//TODO : load all resources
-	loader.load('fonts/labfont.js', function(font) {
-
-		defaultFont = font;
-
+	loadResources(function() {
 		createScene();
 		createLight();
 		createCamera();
@@ -41,7 +33,7 @@ function setup()
 		createStudent();
 		initLabs();
 		draw();
-		// nextSem();
+		nextSem();
 	});
 }
 
@@ -146,75 +138,6 @@ function createCamera()
 	//camera.rotation.x = -0.01 * (ball.posicreateAnswer()tion.y) * Math.PI/180;
 	camera.rotation.y = -60 * Math.PI/180;
 	camera.rotation.z = -90 * Math.PI/180;
-}
-
-function playerPaddleMovement()
-{
-	var isMoves = false;
-	// move left
-	if (Key.isDown(Key.A))
-	{
-		if (student.position.y < fieldHeight * 0.45)
-		{
-			isMoves = true;
-			studentDirY = studentSpeed * 0.5;
-		}
-	}
-	// move right
-	else if (Key.isDown(Key.D))
-	{
-		if (student.position.y > -fieldHeight * 0.45)
-		{
-			isMoves = true;
-			studentDirY = -studentSpeed * 0.5;
-		}
-	}
-
-	// else don't move
-	if(!isMoves)
-	{
-		studentDirY = 0;
-	}
-	isMoves = false;
-
-	// move up
-	if (Key.isDown(Key.W))
-	{
-		if (student.position.x < fieldWidth * 0.45)
-		{
-			isMoves = true;
-			studentDirX = studentSpeed * 0.5;
-		}
-	}
-	// move down
-	else if (Key.isDown(Key.S))
-	{
-		if (student.position.x > -fieldWidth * 0.45)
-		{
-			isMoves = true;
-			studentDirX = -studentSpeed * 0.5;
-		}
-	}
-
-	if(!isMoves)
-	{
-		studentDirX = 0;
-	}
-
-
-	if (Key.isUp(Key.SPACE))
-	{
-		createAnswer()
-		//while(Key.isDown(Key.SPACE));
-	}
-
-
-	//student.scale.y += (1 - student.scale.y) * 0.2;
-	//student.scale.z += (1 - student.scale.z) * 0.2;
-	if (student) {
-		student.position.y += studentDirY;
-		student.position.x += studentDirX;	
-	}	
 }
 
 function removeItem(from, index) {

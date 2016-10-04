@@ -12,18 +12,13 @@ var studentWidth = 20,
 	studentQuality = 1;
 
 function createStudent() {
+	student = resources.studentModel;
+	student.position.x = -fieldWidth/2 + studentWidth;
 
-	var loader = new THREE.ObjectLoader();
-	loader.load("models/student.json",function ( obj ) {
+	// lift students over playing surface
+	student.position.z = studentDepth;
+	student.scale.set(10,10,10);
 
-		student = obj;
-		student.position.x = -fieldWidth/2 + studentWidth;
-
-		// lift students over playing surface
-		student.position.z = studentDepth;
-		student.scale.set(10,10,10);
-
-		student.rotation.x = 90 * Math.PI / 180;
-		scene.add(student);
-	});
+	student.rotation.x = 90 * Math.PI / 180;
+	scene.add(student);
 }

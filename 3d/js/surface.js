@@ -4,7 +4,7 @@ var surfaceWidth = fieldWidth * 1.1,
 
 function createSurface() {
 
-	var texture = new THREE.ImageUtils.loadTexture("textures/surface_3.jpg");
+	var texture = resources.surfaceTexture;
 	texture.wrapS = THREE.RepeatWrapping;
 	texture.wrapT = THREE.RepeatWrapping;
 	texture.repeat.set(2, 2);
@@ -26,7 +26,7 @@ function createSurface() {
 	surface.receiveShadow = true;
 
 	var textGeo = new THREE.TextGeometry("DEADLINE", {
-        font: defaultFont,
+        font: resources.defaultFont,
         size: 53,
         height: 1,
         curveSegments: 12,

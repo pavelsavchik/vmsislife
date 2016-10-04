@@ -1,14 +1,12 @@
 var labs = [];
 var labsFallingBorderX = fieldWidth * 0.8;
 var labsFallingBorderY = fieldHeight * 0.8;
-// var labSettings = {
-    var labSpeed = 0.5
-// };
+var labSpeed = 0.5
 
 function createLab(position, text = "LAB") {
     var textGeo = new THREE.TextGeometry(text, {
 
-        font: defaultFont,
+        font: resources.defaultFont,
         size: 30,
         height: 5,
         curveSegments: 12,
