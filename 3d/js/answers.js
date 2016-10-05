@@ -46,53 +46,40 @@ function answersPhysics() {
     var removedAnswerIndexes = [];
     
     for (var j = 0; j < labs.length; j++) {
-        var labText = labs[j].text;
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i] && labs[j] && answers[i].position.z >= labs[j].position.z 
-                && answers[i].position.x > labs[j].position.x - 30 && answers[i].position.x < labs[j].position.x + 30) {
-                var clash = false,
-                    textToReplace = "",
-                    dY = 0;
+        
+        var lab = labs[j],
+            labL = lab.l,
+            labA = lab.a,
+            labB = lab.b;
 
-                if (labText.includes("L") && answers[i].position.y < labs[j].position.y && answers[i].position.y > labs[j].position.y - 30) {
-                    clash = true;
-                    textToReplace = "L";
-                } else if (labText.includes("A") && answers[i].position.y < labs[j].position.y - 20 && answers[i].position.y > labs[j].position.y - 50) {
-                    clash = true;
-                    textToReplace = "A";
-                    dY = -30;
-                } else if (labText.includes("B") && answers[i].position.y < labs[j].position.y - 50 && answers[i].position.y > labs[j].position.y - 90) {
-                    clash = true;
-                    textToReplace = "B";
-                    dY = -50;
+        for (var i = 0; i < answers.length; i++) {
+            if (answers[i] && answers[i].position.z >= lab.position.z && answers[i].position.x > lab.position.x - 30 && answers[i].position.x < lab.position.x + 30) {
+                
+                var letterToRemove = "";
+
+                if (labL && answers[i].position.y < labL.position.y && answers[i].position.y > labL.position.y - labFontSize) {
+                    letterToRemove = "l";
+                } else if (labA && answers[i].position.y < labA.position.y && answers[i].position.y > labA.position.y - labFontSize) {
+                    letterToRemove = "a";
+                } else if (labB && answers[i].position.y < labB.position.y && answers[i].position.y > labB.position.y - labFontSize) {
+                    letterToRemove = "b";
                 }
 
-                if (clash) {
-                    var newText = labText.replace(textToReplace, "  ");
-                    if (newText.trim() !== "") {
-                        createLab({
-                            x : labs[j].position.x,
-                            y : labs[j].position.y,
-                            z : labs[j].position.z
-                        }, newText);
-                    } else {
-                        passLab();
+                if (letterToRemove) {
 
-                        createEvent({
-                            x : labs[j].position.x,
-                            y : labs[j].position.y,
-                            z : labs[j].position.z
-                        }, "SUCCESS");
+                    createExplosion(lab[letterToRemove].position);
+
+                    removeLetter(letterToRemove, lab);
+
+                    if (!lab.l && !lab.a && !lab.b) {
+                        passLab();
+                        createEvent(lab.position, "SUCCESS");
+                        removeItem(labs, j--);
                     }
 
-                    createExplosion({
-                        x : labs[j].position.x,
-                        y : labs[j].position.y + dY,
-                        z : labs[j].position.z + 15
-                    });
-
                     removeItem(answers, i);
-                    removeItem(labs, j--);
+
+                    break;
                 }
             }
         }

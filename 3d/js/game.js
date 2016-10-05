@@ -38,9 +38,9 @@ function setup()
 		createCamera();
 		createSurface();
 		createStudent();
-		initLabs();
 		initEvents();
 		draw();
+		initLabs();
 		nextSem();
 	});
 }
@@ -63,7 +63,7 @@ function nextSem() {
 
 		isWasted = true
 	} else {
-		labSpeed += 0.5;
+		labSpeed += 0.2;
 			createEvent({
 			x : 500,
 			y : 80,
