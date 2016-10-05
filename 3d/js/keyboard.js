@@ -82,7 +82,7 @@ function playerPaddleMovement()
     {
         if (student.position.x > -fieldWidth * 0.45)
         {
-          rotationY = rotationY === 0 ? 180 : rotationY / 2;
+          rotationY = rotationY === 0 ? 0 : rotationY / 2;
           isMoves = true;
           studentDirX = -studentSpeed * 0.5;
         }

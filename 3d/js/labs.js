@@ -1,5 +1,5 @@
 var labs = [],
-    labsFallingBorderX = fieldWidth * 0.8,
+    labsFallingBorderX = fieldWidth * 0.6,
     labsFallingBorderY = fieldHeight * 0.8,
     labSpeed = 0.2,
     labFontSize = 30,

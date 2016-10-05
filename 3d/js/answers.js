@@ -57,11 +57,11 @@ function answersPhysics() {
                 
                 var letterToRemove = "";
 
-                if (labL && answers[i].position.y < labL.position.y && answers[i].position.y > labL.position.y - labFontSize) {
+                if (labL && answers[i].position.y < labL.position.y + radius && answers[i].position.y > labL.position.y - labFontSize - radius) {
                     letterToRemove = "l";
-                } else if (labA && answers[i].position.y < labA.position.y && answers[i].position.y > labA.position.y - labFontSize) {
+                } else if (labA && answers[i].position.y < labA.position.y + radius && answers[i].position.y > labA.position.y - labFontSize - radius) {
                     letterToRemove = "a";
-                } else if (labB && answers[i].position.y < labB.position.y && answers[i].position.y > labB.position.y - labFontSize) {
+                } else if (labB && answers[i].position.y < labB.position.y + radius && answers[i].position.y > labB.position.y - labFontSize - radius) {
                     letterToRemove = "b";
                 }
 
