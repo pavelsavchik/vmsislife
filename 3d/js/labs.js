@@ -1,19 +1,47 @@
-var labs = [];
-var labsFallingBorderX = fieldWidth * 0.8;
-var labsFallingBorderY = fieldHeight * 0.8;
-var labSpeed = 0.5
+var labs = [],
+    labsFallingBorderX = fieldWidth * 0.6,
+    labsFallingBorderY = fieldHeight * 0.8,
+    labSpeed = 0.2,
+    labFontSize = 30,
+    labFontHeight = 5;
 
-function createLab(position, text = "LAB") {
-    var textGeo = new THREE.TextGeometry(text, {
+function createLab() {
 
-        font: resources.defaultFont,
-        size: 30,
-        height: 5,
-        curveSegments: 12,
+    var position =  {
+        x : Math.random() * labsFallingBorderX - labsFallingBorderX / 2,
+        y : Math.random() * labsFallingBorderY - labsFallingBorderY / 2,
+        z : maxHeight
+    }, positionA = {
+        x : position.x,
+        y : position.y - 27,
+        z : position.z
+    }, positionB = {
+        x : position.x,
+        y : position.y - 62,
+        z : position.z
+    }
 
-        bevelThickness: 5,
-        bevelSize: 1,
-        bevelEnabled: true
+    var lab = {
+        l : createLetter("L", position),
+        a : createLetter("A", positionA),
+        b : createLetter("B", positionB),
+        position : position
+    };
+    
+    labs.push(lab);
+}
+
+function createLetter(letter, position) {
+    var textGeo = new THREE.TextGeometry(letter, {
+
+        font : resources.defaultFont,
+        size : labFontSize,
+        height : labFontHeight,
+        curveSegments : 12,
+
+        bevelThickness : 5,
+        bevelSize : 1,
+        bevelEnabled : true
 
     });
 
@@ -34,32 +62,41 @@ function createLab(position, text = "LAB") {
     mesh.rotation.z = 90 * Math.PI / 180;
 
     mesh.castShadow = true;
-    mesh.text = text;
+
     scene.add(mesh);
-    labs.push(mesh);
+
+    return mesh;
 }
 
 function labsMovement() {
     for (var i = 0; i < labs.length; i++) {
-        labs[i].position.z -= labSpeed;
+        var lab = labs[i];
+
+        lab.position.z -= labSpeed;
+
+        labs[i].l && (labs[i].l.position.z = lab.position.z);
+        labs[i].a && (labs[i].a.position.z = lab.position.z);
+        labs[i].b && (labs[i].b.position.z = lab.position.z);
         
-        if (labs[i].position.z < 0) {
-            //remove first lab from scene
+        if (lab.position.z < 0) {
             failLab();
-
-            createEvent(labs[i].position, "FAIL");
-
-            scene.remove(labs[i]);
-
-            //remove first lab from array
-            labs.splice(i--, 1);
+            createEvent(lab.position, "FAIL");
+            removeLab(i--);
         }
     }
 }
 
 function removeLab(index) {
-    scene.remove(labs[index]);
+    var lab = labs[index];
+    lab.l && scene.remove(lab.l);
+    lab.a && scene.remove(lab.a);
+    lab.b && scene.remove(lab.b);
     labs.splice(index, 1);
+}
+
+function removeLetter(letter, fromLab) {
+    scene.remove(fromLab[letter]);
+    fromLab[letter] = null;
 }
 
 function removeLabs(index) {

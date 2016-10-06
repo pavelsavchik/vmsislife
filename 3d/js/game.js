@@ -18,7 +18,7 @@ var maxScore = 20;
 var defaultFont;
 var diplomRunned = true;
 
-var currentSem = 1;
+var currentSem = 0;
 
 var passedLabsLabel, failedLabsLabel;
 
@@ -39,10 +39,10 @@ function setup()
 		createCamera();
 		createSurface();
 		createStudent();
-		initLabs();
 		initEvents();
 		createDiplom();
 		draw();
+		initLabs();
 		nextSem();
 	});
 }
@@ -55,19 +55,22 @@ function nextSem() {
 		removeVedoms();
 		removeAnswers();
 
+		convertStudentToMilitary();
+
 		createEvent({
 			x : 500,
 			y : 120,
 			z : 150
 		}, "WASTED");
+
 		isWasted = true
 	} else {
-		labSpeed += 0.5;
+		labSpeed += 0.2;
 			createEvent({
 			x : 500,
 			y : 80,
 			z : 150
-		}, "SEM", currentSem++);
+		}, "SEM", ++currentSem);
 		setTimeout(nextSem, 20000);
 	}
 }
@@ -97,17 +100,17 @@ function createLight() {
 
 	scene.add(pointLight);
 
-	//spotLight = new THREE.SpotLight(0xFF0000);
-	//spotLight.position.set(0, 0, 460);
-	//spotLight.intensity = .1;
-	//spotLight.castShadow = true;
-	// spotLight.shadowMapWidth = 1024;
-	// spotLight.shadowMapHeight = 1024;
+	spotLight = new THREE.SpotLight(0xFF0000);
+	spotLight.position.set(0, 0, 460);
+	spotLight.intensity = .1;
+	spotLight.castShadow = true;
+	spotLight.shadowMapWidth = 1024;
+	spotLight.shadowMapHeight = 1024;
 	
-	//scene.add(spotLight);
+	scene.add(spotLight);
 
-	//renderer.shadowMapEnabled = true;
-	//renderer.shadowMapType = THREE.PCFSoftShadowMap;
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;
 }
 
 function draw()
