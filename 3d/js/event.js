@@ -74,6 +74,15 @@ function initEvents() {
 			speed : -10,
 			lifeTime : 100
 		},
+		DIPLOM : {
+			color : 0x781311,
+			message : "diplom",
+			fontSize : 40,
+			font : resources.bloodyFont,
+			direction : "x",
+			speed : -10,
+			lifeTime : 100
+		},
 		WASTED : {
 			color : 0xFF0000,
 			message : "otchislen",

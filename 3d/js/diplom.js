@@ -1,15 +1,15 @@
-var diplomSpeed = 0.15;
+var diplomSpeed = 0.4;
 var diplom = null;
 var diplomDirX = 0, diplomDirY = 0;
 var diplomScale = 1;
 var diplomSize = 80;
 
 function createDiplom() {
-    var textGeo = new THREE.TextGeometry("DYPLOM", {
+    var textGeo = new THREE.TextGeometry("DIPLOM", {
 
         font: resources.defaultFont,
         size: diplomSize,
-        height: 10,
+        height: 20,
         curveSegments: 12,
 
         bevelThickness: 5,
@@ -24,7 +24,7 @@ function createDiplom() {
 
     position =  {
             x: 0,
-            y: 300,
+            y: 250,
             z: maxHeight
         };
 
@@ -65,7 +65,7 @@ function diplomPhysics() {
 }
 
 function diplomMovement() {
-    diplom.position.z -= labSpeed;
+    diplom.position.z -= diplomSpeed;
 
 
     //var rand = Math.random();

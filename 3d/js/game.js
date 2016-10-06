@@ -67,6 +67,11 @@ function nextSem() {
 		isWasted = true
 	} else {
 		if(currentSem == 9) {
+			createEvent({
+			x : 500,
+			y : 80,
+			z : 150
+		}, "DIPLOM");
 			createDiplom();
 		} else {
 			labSpeed += 0.2;
