@@ -43,7 +43,7 @@ function setup()
 		createStudent();
 		initEvents();
 		draw();
-		initLabs();
+		
 		nextSem();
 	});
 }
@@ -66,6 +66,9 @@ function nextSem() {
 
 		isWasted = true
 	} else {
+		
+		initLabs();
+
 		if(currentSem == 9) {
 			createEvent({
 			x : 500,
