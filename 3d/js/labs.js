@@ -9,7 +9,7 @@ function createLab() {
 
     var position =  {
         x : Math.random() * labsFallingBorderX - labsFallingBorderX / 2,
-        y : Math.random() * labsFallingBorderY - labsFallingBorderY / 2,
+        y : (Math.random() - 0.5)  * labsFallingBorderY + 40,
         z : maxHeight
     }, positionA = {
         x : position.x,
