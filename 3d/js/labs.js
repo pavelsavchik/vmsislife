@@ -84,6 +84,9 @@ function labsMovement() {
             removeLab(i--);
         }
     }
+
+    if(labsInSemLeft <= 0 && labs.length == 0 && !isWasted)
+        nextSem();
 }
 
 function removeLab(index) {
@@ -109,9 +112,10 @@ function initLabs() {
     THREE.Cache.enabled = true;
 
     var generateLab = function () {
-        if (!isWasted) {
+        if (!isWasted && labsInSemLeft > 0) {
             createLab();
-            setTimeout(generateLab, 4000);   
+            labsInSemLeft--;
+            setTimeout(generateLab, 4000);
         }
     };
     setTimeout(generateLab, 4000);

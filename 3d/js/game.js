@@ -19,6 +19,8 @@ var defaultFont;
 var diplomRunned = false;
 
 var currentSem = 0;
+var LABS_PER_SEM = 8;
+var labsInSemLeft = LABS_PER_SEM;
 
 var passedLabsLabel, failedLabsLabel;
 
@@ -73,7 +75,7 @@ function nextSem() {
 				y : 80,
 				z : 150
 			}, "SEM", ++currentSem);
-			setTimeout(nextSem, 20000);
+			labsInSemLeft = LABS_PER_SEM;
 		}
 	}
 }
