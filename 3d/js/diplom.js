@@ -1,13 +1,14 @@
-var diplomSpeed = 0.2;
+var diplomSpeed = 0.15;
 var diplom = null;
 var diplomDirX = 0, diplomDirY = 0;
 var diplomScale = 1;
+var diplomSize = 80;
 
 function createDiplom() {
     var textGeo = new THREE.TextGeometry("DYPLOM", {
 
         font: resources.defaultFont,
-        size: 80,
+        size: diplomSize,
         height: 10,
         curveSegments: 12,
 
@@ -17,7 +18,7 @@ function createDiplom() {
 
     });
 
-    var textMaterial = new THREE.MeshPhongMaterial({color: 0xFF000});
+    var textMaterial = new THREE.MeshPhongMaterial({color: 0xAA0000});
 
     var mesh = new THREE.Mesh(textGeo, textMaterial);
 
@@ -37,18 +38,16 @@ function createDiplom() {
     mesh.text = "DYPLOM";
     scene.add(mesh);
     diplom = mesh;
-}
 
-function runDiplom() {
-
+    diplomRunned = true;
 }
 
 function diplomPhysics() {
 
         for (var i = 0; i < answers.length; i++) {
             if (answers[i].position.z >= diplom.position.z
-                && answers[i].position.x > diplom.position.x && answers[i].position.x < diplom.position.x + 50
-                //&& answers[i].position.y > diplom.position.y && answers[i].position.y < diplom.position.y + 50
+                && answers[i].position.x < diplom.position.x && answers[i].position.x > diplom.position.x - 50
+                && answers[i].position.y < diplom.position.y && answers[i].position.y > diplom.position.y - diplomSize * diplomScale * 6
             )
             {
 
@@ -92,5 +91,33 @@ function diplomMovement() {
 
 function makeDiplomSmaller(){
     diplomScale -= 0.05;
-    diplom.scale.set(diplomScale, diplomScale, diplomScale)
+    diplom.scale.set(diplomScale, diplomScale, diplomScale);
+    diplom.position.y -= 10;
+
+    if(diplomScale <= 0){
+        passDiplom()
+    }
+}
+
+function passDiplom() {
+    //alert('TI SDAL DIPLOM');
+    salut();
+    createEvent({
+        x : 500,
+        y : 160,
+        z : 150
+    }, "DIPLOM_PASSED")
+    isWasted = true
+}
+
+function salut(){
+    //for(var i = 0; i < 1000; i++) {
+    //    createExplosion({
+    //        x: (Math.random() - 0.5) * 300 ,
+    //        y: (Math.random() - 0.5) * 300 ,
+    //        z: (Math.random() - 0.5) * 300
+    //    });
+    //
+    //}
+
 }

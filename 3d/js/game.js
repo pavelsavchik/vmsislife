@@ -16,7 +16,7 @@ var failedLabs = 0;
 var maxScore = 20;
 
 var defaultFont;
-var diplomRunned = true;
+var diplomRunned = false;
 
 var currentSem = 0;
 
@@ -40,7 +40,6 @@ function setup()
 		createSurface();
 		createStudent();
 		initEvents();
-		createDiplom();
 		draw();
 		initLabs();
 		nextSem();
@@ -65,13 +64,17 @@ function nextSem() {
 
 		isWasted = true
 	} else {
-		labSpeed += 0.2;
+		if(currentSem == 9) {
+			createDiplom();
+		} else {
+			labSpeed += 0.2;
 			createEvent({
-			x : 500,
-			y : 80,
-			z : 150
-		}, "SEM", ++currentSem);
-		setTimeout(nextSem, 20000);
+				x : 500,
+				y : 80,
+				z : 150
+			}, "SEM", ++currentSem);
+			setTimeout(nextSem, 20000);
+		}
 	}
 }
 
@@ -115,15 +118,14 @@ function createLight() {
 
 function draw()
 {
-
 	answersPhysics();
 	answersMovement();
 	playerPaddleMovement();
 	explosionsPhysics();
+	eventsMovement();
 
 	if(!diplomRunned) {
 		labsMovement();
-		eventsMovement();
 		vedomsPhysics();
 	} else {
 		diplomMovement();

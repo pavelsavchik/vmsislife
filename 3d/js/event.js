@@ -82,6 +82,15 @@ function initEvents() {
 			direction : "x",
 			speed : -10,
 			lifeTime : 50
+		},
+		DIPLOM_PASSED : {
+			color : 0x00AA00,
+			message : "vmsis passed",
+			fontSize : 40,
+			font : resources.bloodyFont,
+			direction : "x",
+			speed : -10,
+			lifeTime : 50
 		}
 	}
 }
