@@ -112,9 +112,11 @@ function initLabs() {
     THREE.Cache.enabled = true;
 
     var generateLab = function () {
-        if (!isWasted && labsInSemLeft > 0) {
-            createLab();
-            labsInSemLeft--;
+        if (!isWasted) {
+            if (labsInSemLeft > 0) {
+                createLab();   
+                labsInSemLeft--;
+            }
             setTimeout(generateLab, 4000);
         }
     };
