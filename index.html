@@ -3,6 +3,9 @@
 <head>
     <title>Student's life</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src='./js/jquery.js'></script>
+    <script src='./js/bootstrap.min.js'></script>
+
     <style>
         body {
             background-color: black;
@@ -18,8 +21,10 @@
     </style>
 </head>
 <body onload='setup();'>
-<div class="container">
-    <div class="row">
+
+
+<div class="container" >
+    <div class="row" id="main-content" style="visibility: hidden;">
         <div class="col-lg-2 text-right" style="color:greenyellow; ">
             <div style="font-size: 200%;">
                 <b>Passed:</b>
@@ -31,7 +36,7 @@
 
             </div>
             <script src='./js/three.js'></script>
-			<script src='./js/resourceLoader.js'></script>
+            <script src='./js/resourceLoader.js'></script>
             <script src='./js/keyboard.js'></script>
             <script src='./js/student.js'></script>
             <script src='./js/game.js'></script>
@@ -41,14 +46,23 @@
             <script src='./js/explosion.js'></script>
             <script src='./js/vedoma.js'></script>
             <script src='./js/event.js'></script>
-			<script src='./js/resourceLoader.js'></script>
+            <script src='./js/resourceLoader.js'></script>
             <script src='./js/diplom.js'></script>
+            <script src='./js/UI.js'></script>
         </div>
         <div class="col-lg-2 text-left" style="color:darkred; ">
             <div style="font-size: 200%;">
                 <b>Failed:</b>
             </div>
             <div id="failedLabs" style="font-size: 1000%;">0</div>
+        </div>
+    </div>
+
+
+    <div class="progress" id="overlay">
+        <div class="progress-bar progress-bar-striped active" role="progressbar"
+             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;" id="page-loading-progress">
+            <span class="sr-only">70% Complete</span>
         </div>
     </div>
 
