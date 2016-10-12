@@ -114,7 +114,7 @@ function createLight() {
 	pointLight.position.x = -1000;
 	pointLight.position.y = 0;
 	pointLight.position.z = 1000;
-	pointLight.intensity = 2.9;
+	pointLight.intensity = 4;
 	pointLight.distance = 10000;
 
 	scene.add(pointLight);

@@ -40,7 +40,7 @@ function initEvents() {
 	eventTypes = {
 		SUCCESS : {
 			color : 0x00FF00,
-			message : "passed",
+			message : "zachteno",
 			fontSize : 12,
 			font : resources.defaultFont,
 			direction : "z",
@@ -49,7 +49,7 @@ function initEvents() {
 		},
 		FAIL : {
 			color : 0xFF0000,
-			message : "failed",
+			message : "potracheno",
 			fontSize : 12,
 			font : resources.defaultFont,
 			direction : "z",
@@ -58,7 +58,7 @@ function initEvents() {
 		},
 		VEDOMA_CATCHED : {
 			color : 0x0624E1,
-			message : "catched",
+			message : "vedoma",
 			fontSize : 12,
 			font : resources.defaultFont,
 			direction : "z",
