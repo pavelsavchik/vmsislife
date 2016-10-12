@@ -13,8 +13,8 @@
 
         #gameCanvas {
             background-color: black;
-            width: 840px;
-            height: 500px;
+            /*width: 840px;*/
+            height: 100%;
             margin: auto;
             align: center;
         }
@@ -58,11 +58,13 @@
         </div>
     </div>
 
-
-    <div class="progress" id="overlay">
-        <div class="progress-bar progress-bar-striped active" role="progressbar"
-             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;" id="page-loading-progress">
-            <span class="sr-only">70% Complete</span>
+    <div id="overlay">
+        <h1 style="color:white" class="text-center"><b>VMSIS life</b> is loaded, please wait...</h1>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar"
+                 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;" id="page-loading-progress">
+                <span class="sr-only">50% Complete</span>
+            </div>
         </div>
     </div>
 

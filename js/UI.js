@@ -4,8 +4,7 @@ function finishPageLoading( ) {
     document.getElementById("main-content").style.visibility = "visible";
 }
 
-function updateProgress(percents ) {
-
+function updateProgress(percents) {
     var element = document.getElementById("page-loading-progress");
     element.style.width = percents.toString() + "%";
     element.setAttribute("aria-valuenow", percents);

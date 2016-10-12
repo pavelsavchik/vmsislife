@@ -37,17 +37,11 @@ function setup()
 
 	loadResources(function() {
 		createScene();
-		updateProgress(15);
 		createLight();
-		updateProgress(30);
 		createCamera();
-		updateProgress(45);
 		createSurface();
-		updateProgress(60);
 		createStudent();
-		updateProgress(75);
 		initEvents();
-		updateProgress(90);
 		finishPageLoading();
 		draw();
 		nextSem();
