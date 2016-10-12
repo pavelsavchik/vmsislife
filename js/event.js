@@ -100,6 +100,15 @@ function initEvents() {
 			direction : "x",
 			speed : -10,
 			lifeTime : 50
+		},
+		CATCH_VEDOMS : {
+			color : 0x0000AA,
+			message : "catch vedoms!!!",
+			fontSize : 40,
+			font : resources.bloodyFont,
+			direction : "y",
+			speed : -10,
+			lifeTime : 50
 		}
 	}
 }

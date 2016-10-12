@@ -6,13 +6,13 @@ var vedoms = [],
     vedomaSize = 30;
 
 var vedomaRotationSpeed = 2 * Math.PI / 180;
-var vedomaRotationAxis = new THREE.Vector3(0,0.5, 0);
+var vedomaRotationAxis = new THREE.Vector3(0, 0.5, 0);
 
 function createVedoma() {
 
-    var geometry = new THREE.PlaneGeometry( vedomaSize, vedomaSize / 2);
-    var material = new THREE.MeshBasicMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
-    var vedoma = new THREE.Mesh( geometry, material );
+    var geometry = new THREE.PlaneGeometry(vedomaSize, vedomaSize / 2);
+    var material = new THREE.MeshBasicMaterial({color: 0xffffff, side: THREE.DoubleSide});
+    var vedoma = new THREE.Mesh(geometry, material);
 
     vedoma.position.x = (Math.random() - 0.5) * labsFallingBorderX;
     vedoma.position.y = (Math.random() - 0.4) * labsFallingBorderY;
@@ -21,18 +21,18 @@ function createVedoma() {
     vedoma.rotation.x = 60 * Math.PI / 180;
 
     vedoma.castShadow = true;
-    scene.add( vedoma );
+    scene.add(vedoma);
     vedoms.push(vedoma);
 }
 
 function vedomsPhysics() {
-    if(vedoms.length < failedLabs && Math.random() < 0.003 && !isWasted) {
+    if (vedoms.length < failedLabs && (Math.random() < 0.003 || isVedomsModeRunned) && !isWasted) {
         createVedoma();
     }
 
-    for(var i = 0; i < vedoms.length; i++) {
+    for (var i = 0; i < vedoms.length; i++) {
 
-        vedoms[i].rotateOnAxis(vedomaRotationAxis,vedomaRotationSpeed);
+        vedoms[i].rotateOnAxis(vedomaRotationAxis, vedomaRotationSpeed);
 
         var vedoma = vedoms[i];
         if (vedoma.position.x > student.position.x - vedomaSize / 2 && vedoma.position.x < student.position.x + vedomaSize / 2 &&
@@ -46,7 +46,7 @@ function vedomsPhysics() {
 }
 
 function vedomaCatched() {
-    if(failedLabs)
+    if (failedLabs)
         failedLabs--;
     document.getElementById("failedLabs").innerHTML = failedLabs;
 }
@@ -58,7 +58,18 @@ function removeVedoma(index) {
 }
 
 function removeVedoms() {
-    for(var i = vedoms.length - 1; i >= 0; i--){
+    for (var i = vedoms.length - 1; i >= 0; i--) {
         removeVedoma(i)
     }
+}
+
+function runVedomsMode() {
+    createEvent({x: 0, y: 400, z: 150}, "CATCH_VEDOMS");
+    isVedomsModeRunned = true;
+    setTimeout(finishVedomsMode, 5000);
+}
+
+function finishVedomsMode() {
+    isVedomsModeRunned = false;
+    isVedomsModeFinished = true;
 }

@@ -21,6 +21,8 @@ var diplomRunned = false;
 var currentSem = 0;
 var LABS_PER_SEM = 8;
 var labsInSemLeft = LABS_PER_SEM;
+var isVedomsModeRunned = false;
+var isVedomsModeFinished = false;
 
 var passedLabsLabel, failedLabsLabel;
 
@@ -50,8 +52,12 @@ function setup()
 }
 
 function nextSem() {
-
-	if (failedLabs > 0) {
+	if(failedLabs > 0 && !isVedomsModeRunned){
+		runVedomsMode();}
+	else if (failedLabs > 0 && isVedomsModeRunned && !isVedomsModeFinished){
+		return;
+	}else if (failedLabs > 0 && isVedomsModeFinished) {
+		isVedomsModeFinished = false;
 		removeLabs();
 		removeEvents();
 		removeVedoms();
