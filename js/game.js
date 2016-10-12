@@ -73,6 +73,8 @@ function nextSem() {
 
 		isWasted = true
 	} else {
+		isVedomsModeFinished = false;
+		isVedomsModeRunned = false;
 		if(currentSem == 9) {
 			createEvent({
 			x : 500,
