@@ -3,7 +3,8 @@ var labs = [],
     labsFallingBorderY = fieldHeight * 0.8,
     labSpeed = 0.2,
     labFontSize = 30,
-    labFontHeight = 5;
+    labFontHeight = 5,
+    labsDefaultTimeout = 4000;
 
 function createLab() {
 
@@ -95,6 +96,7 @@ function removeLab(index) {
     lab.a && scene.remove(lab.a);
     lab.b && scene.remove(lab.b);
     labs.splice(index, 1);
+    setLabsInSemLeft(labsInSemLeft);
 }
 
 function removeLetter(letter, fromLab) {
@@ -115,12 +117,12 @@ function initLabs() {
         if (!isWasted) {
             if (labsInSemLeft > 0) {
                 createLab();   
-                labsInSemLeft--;
+                setLabsInSemLeft(labsInSemLeft - 1);
             }
-            setTimeout(generateLab, 4000);
+            setTimeout(generateLab, labsDefaultTimeout - currentSem * 200);
         }
     };
-    setTimeout(generateLab, 4000);
+    setTimeout(generateLab, labsDefaultTimeout);
 }
 
 function passLab() {

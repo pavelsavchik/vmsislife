@@ -2,18 +2,13 @@
 // ------- GLOBAL VARIABLES ------------ //
 // ------------------------------------- //
 
-// scene object variables
 var renderer, scene, camera, pointLight;
 
-// field variables
 var fieldWidth = 300, fieldHeight = 500;
 var sceneWidth, sceneHeight, maxHeight = 300;
 
-// game-related variables
 var passedLabs = 0;
 var failedLabs = 0;
-// you can change this to any positive whole number
-var maxScore = 20;
 
 var defaultFont;
 var diplomRunned = false;
@@ -24,7 +19,7 @@ var labsInSemLeft = LABS_PER_SEM;
 var isVedomsModeRunned = false;
 var isVedomsModeFinished = false;
 
-var passedLabsLabel, failedLabsLabel;
+var passedLabsLabel, failedLabsLabel, leftLabsLabel, phaseLabel;
 
 var isWasted = false;
 
@@ -36,6 +31,8 @@ function setup()
 {
 	passedLabsLabel = document.getElementById("passedLabs");
 	failedLabsLabel = document.getElementById("failedLabs");
+	leftLabsLabel = document.getElementById("leftLabs");
+	phaseLabel = document.getElementById("phase");
 
 	loadResources(function() {
 		createScene();
@@ -53,10 +50,10 @@ function setup()
 
 function nextSem() {
 	if(failedLabs > 0 && !isVedomsModeRunned){
-		runVedomsMode();}
-	else if (failedLabs > 0 && isVedomsModeRunned && !isVedomsModeFinished){
+		runVedomsMode();
+	} else if (failedLabs > 0 && isVedomsModeRunned && !isVedomsModeFinished){
 		return;
-	}else if (failedLabs > 0 && isVedomsModeFinished) {
+	} else if (failedLabs > 0 && isVedomsModeFinished) {
 		isVedomsModeFinished = false;
 		removeLabs();
 		removeEvents();
@@ -75,6 +72,7 @@ function nextSem() {
 	} else {
 		isVedomsModeFinished = false;
 		isVedomsModeRunned = false;
+		
 		if(currentSem == 9) {
 			createEvent({
 			x : 500,
@@ -82,6 +80,7 @@ function nextSem() {
 			z : 150
 		}, "DIPLOM");
 			createDiplom();
+			setPhase("diplom");
 		} else {
 			labSpeed += 0.2;
 			createEvent({
@@ -89,7 +88,8 @@ function nextSem() {
 				y : 80,
 				z : 150
 			}, "SEM", ++currentSem);
-			labsInSemLeft = LABS_PER_SEM;
+			setPhase("sem " + currentSem);
+			setLabsInSemLeft(LABS_PER_SEM);
 		}
 	}
 }
@@ -183,4 +183,13 @@ function createCamera()
 function removeItem(from, index) {
 	scene.remove(from[index]);
     from.splice(index, 1);
+}
+
+function setLabsInSemLeft(value) {
+	labsInSemLeft = value;
+	leftLabsLabel.innerHTML = labsInSemLeft + labs.length;
+}
+
+function setPhase(value) {
+	phaseLabel.innerHTML = value
 }

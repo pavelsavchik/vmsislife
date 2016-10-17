@@ -74,7 +74,7 @@ function answersPhysics() {
                     if (!lab.l && !lab.a && !lab.b) {
                         passLab();
                         createEvent(lab.position, "SUCCESS");
-                        removeItem(labs, j--);
+                        removeLab(j--);
                     }
 
                     removeItem(answers, i);
